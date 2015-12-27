@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   root 'blogs#index'
-  get 'blogs/:id' => 'blogs#show', as: :blog
+  get 'blogs/:urllink' => 'blogs#show', as: :blog
 
 
   #session routes
