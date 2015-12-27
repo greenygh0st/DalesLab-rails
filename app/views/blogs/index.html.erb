@@ -1,3 +1,4 @@
 <% @blogs.each do |blog| %>
 <p><%= blog.title %></p>
+<%= link_to "Read More", :action => :show, :urllink => blog.urllink %>
 <% end %>

@@ -10,6 +10,8 @@ class CreateBlogs < ActiveRecord::Migration
 
       t.string :urllink
 
+      #t.boolean :published
+
       t.references :user
       t.timestamps null: false
     end
