@@ -3,7 +3,7 @@ class BlogsController < ApplicationController
 
   def index
     @blogs = Blog.all
-    @popularblogs = @blogs.sort_by do |item|
+    @popularblogs = @blogs.take(3).sort_by do |item|
       item[:views]
     end
     #need to get the top 5 most common tags
@@ -45,6 +45,23 @@ class BlogsController < ApplicationController
     @blog = Blog.new(blog_params)
     @blog.urllink = @blog.title.downcase.gsub(/[^0-9A-Za-z]/, '').str.gsub(/\s/,'-').gsub!(/[-]+/, "-") #transform to lowercase, remove special characters, swap spaces for dashes and then strip repeated dashes
     @blog.firstimage = get_first_image(@blog.content) #should work...
+    #how to determine type (kind_of) of post (blog, singleimage, slideshow, quote)
+    #blog = 1-2 photos more than 50 words in post, content field not empty
+    #single image = 1-2 photos less than 50 words in post, content field not empty
+    #slideshow = more than 4 photos in a post, content field not empty
+    #quote = content field is empty
+    images_c = get_image_count(@blog.content)
+    words_c = word_count(@blog.content)
+    if words == 0
+      @blog.kind_of = "quote"
+    elsif words_c > 0 && words_c <= 50 && images_c < 4
+      @blog.kind_of = "singleimage"
+    elsif words_c > 50 && images_c < 4
+      @blog.kind_of = "blog"
+    elsif words_c > 0 && images_c >= 4
+      @blog.kind_of = "slideshow"
+    end
+
     if @blog.save
       #eventually trigger the notifications to others
       redirect_to @blog, :notice => 'Blog post created.'

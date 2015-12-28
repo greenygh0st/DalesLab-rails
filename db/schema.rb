@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151227070259) do
+ActiveRecord::Schema.define(version: 20151228033331) do
 
   create_table "blogs", force: :cascade do |t|
     t.string   "title"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(version: 20151227070259) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.string   "email"
+    t.string   "verification_string"
+    t.boolean  "verified"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -37,4 +37,19 @@ class ApplicationController < ActionController::Base
     string = images[0]
   end
 
+  def get_image_count(string)
+    count = 0
+    linked = string.gsub( %r{http://[^\s<]+} ) do |url|
+      if url[/(?:png|jpe?g|gif|svg)$/]
+        count += 1
+      else
+        #do nothing
+      end
+    end
+    return count
+  end
+
+  def word_count(string)
+    words = string.split(" ")
+    return words.length
 end
