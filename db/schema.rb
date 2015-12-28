@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20151227070259) do
     t.string   "kind_of"
     t.integer  "views"
     t.string   "urllink"
+    t.string   "firstimage"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

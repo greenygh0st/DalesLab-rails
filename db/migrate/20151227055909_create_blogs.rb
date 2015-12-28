@@ -9,6 +9,7 @@ class CreateBlogs < ActiveRecord::Migration
       t.integer :views #gets incremented every time the page is viewed. Handled in the show controller
 
       t.string :urllink
+      t.string :firstimage
 
       #t.boolean :published
 

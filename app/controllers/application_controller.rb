@@ -25,4 +25,16 @@ class ApplicationController < ActionController::Base
     redirect_to '/' unless current_user.admin?
   end
 
+  def get_first_image string
+    images = []
+    linked = string.gsub( %r{http://[^\s<]+} ) do |url|
+      if url[/(?:png|jpe?g|gif|svg)$/]
+        images << url
+      else
+        #do nothing
+      end
+    end
+    string = images[0]
+  end
+
 end
