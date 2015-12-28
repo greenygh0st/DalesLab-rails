@@ -1,4 +1,6 @@
 class BlogsController < ApplicationController
+  before_action :require_admin, only: [:new, :create, :edit, :update]
+
   def index
     @blogs = Blog.all
     @popularblogs = @blogs.sort_by do |item|

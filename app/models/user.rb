@@ -3,6 +3,10 @@ class User < ActiveRecord::Base
 
   has_many :blogs
 
+  def member?
+    self.role == 'member'
+  end
+
   def editor?
     self.role == 'editor'
   end
