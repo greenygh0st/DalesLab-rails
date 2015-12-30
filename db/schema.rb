@@ -18,13 +18,16 @@ ActiveRecord::Schema.define(version: 20151228033331) do
     t.string   "subtitle"
     t.string   "category"
     t.string   "content"
+    t.boolean  "is_published"
+    t.boolean  "allow_comments"
+    t.string   "top_image"
     t.string   "kind_of"
     t.integer  "views"
     t.string   "urllink"
     t.string   "firstimage"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "subscriptions", force: :cascade do |t|

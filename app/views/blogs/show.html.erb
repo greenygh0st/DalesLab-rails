@@ -1,9 +1,80 @@
-<h1>Blog</h1>
-<h2><%= @blog.title %></h2>
-<h3>Written By: <%= @blog.user.first_name %></h3>
-<p><%= parse_links_and_images(@blog.content).html_safe %></p>
+<div id="single">
+  <div class="container">
+    <div class="post">
+      <!-- Top image would go here -->
+      <% if @blog.top_image != "" %>
+      <div style=""></div>
+      <img src="<%= @blog.top_image %>" class="img-responsive" />
+      <% end %>
 
-<% if current_user && current_user.admin? %>
-  <p class="recipe-delete"><%= link_to "Edit", blog_path(@blog) %><p>
-<% end %>
-<p>Find me in app/views/blogs/show.html.erb</p>
+      <div class="caption">
+        <div class="header">
+          <span class="post-tag"><%= @blog.category %></span>
+          <h1><%= @blog.title %></h1>
+          Written By: <%= @blog.user.first_name %>
+        </div>
+        <!-- Post Content -->
+        <%= parse_line_breaks(parse_links_and_images(@blog.content)).html_safe %>
+        <!-- Post Content Ends -->
+
+      </div>
+    </div>
+    <% if current_user && current_user.admin? %>
+      <p class="blog-edit">
+        <a href="blogs/<%= @blog.urllink %>/edit" class="post-title">Edit This Post</a>
+      </p>
+    <% end %>
+
+    <div class="related">
+      <div class="text-center">
+        <h3>You may also like</h3>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <a href="#">
+            <img src="img/photos/DeathtoStock_EnergyandSerenity7.jpg" class="img-responsive" />
+            <h4>Don't look at me</h4>
+            <span class="post-tag">#lifestype</span>
+          </a>
+        </div>
+        <div class="col-md-4">
+          <a href="#">
+            <img src="img/photos/DeathtoStock_EnergyandSerenity6.jpg" class="img-responsive" />
+            <h4>You're sharp alright</h4>
+            <span class="post-tag">#music</span>
+          </a>
+        </div>
+        <div class="col-md-4">
+          <a href="#">
+            <img src="img/photos/DeathtoStock_EnergyandSerenity5.jpg" class="img-responsive" />
+            <h4>Loose lips</h4>
+            <span class="post-tag">#travel</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="comments">
+
+      <!-- START DISQUS -->
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+          /* * * CONFIGURATION VARIABLES * * */
+          var disqus_shortname = 'adabootstrap';
+
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+      <!-- END DISQUS -->
+
+    </div>
+
+
+  </div>
+
+</div>
