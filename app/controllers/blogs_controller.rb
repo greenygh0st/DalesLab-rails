@@ -11,7 +11,7 @@ class BlogsController < ApplicationController
       tags = Hash.new(0)
 
       @blogs.each do |blog|
-        (rawtags << blog.category.split(" ")).flatten!
+        (rawtags << blog.category.split(" ")).flatten! #get a list of every tag ever used
       end
 
       rawtags.each do |tag|
@@ -21,11 +21,11 @@ class BlogsController < ApplicationController
       tags = tags.sort_by do |tag, count|
           count
       end
-      @commontags = tags.reverse #.first(5) #may want to limit in the future??
-    #then this goes in the view
-    #<% @commontags.each do |t, f| %>
-    #<%= t %>
-    #<% end %>
+      @commontags = tags.reverse.first(20)
+      #then this goes in the view
+      #<% @commontags.each do |t, f| %>
+      #<%= t %>
+      #<% end %>
     #end of getting the most common tags
 
   end
@@ -54,13 +54,15 @@ class BlogsController < ApplicationController
     words_c = word_count(@blog.content)
     if words == 0
       @blog.kind_of = "quote"
-    elsif words_c > 0 && words_c <= 50 && images_c < 4
+    elsif words_c > 0 && words_c <= 25 && images_c < 4
       @blog.kind_of = "singleimage"
-    elsif words_c > 50 && images_c < 4
+    elsif words_c > 25 && images_c < 4
       @blog.kind_of = "blog"
     elsif words_c > 0 && images_c >= 4
       @blog.kind_of = "slideshow"
     end
+
+    @blog.user = current_user #set the current user as the blogs author
 
     if @blog.save
       #eventually trigger the notifications to others
@@ -69,4 +71,20 @@ class BlogsController < ApplicationController
       render 'new'
     end
   end
+
+  def edit
+    link = params[:urllink]
+    @blog = Blog.find_by urllink: link
+  end
+
+  def update
+    link = params[:urllink]
+    @blog = Blog.find_by urllink: link
+      if @recipe.update(recipe_params)
+        redirect_to @recipe
+      else
+        render 'edit'
+      end
+  end
+
 end

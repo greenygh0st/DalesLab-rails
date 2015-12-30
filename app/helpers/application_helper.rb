@@ -9,4 +9,31 @@ module ApplicationHelper
     end
     string = linked
   end
+
+  def remove_links_and_images string
+    linked = string.gsub( %r{http://[^\s<]+} ) do |url|
+      if url[/(?:png|jpe?g|gif|svg)$/]
+        ""
+      else
+        ""
+      end
+    end
+    string = linked
+  end
+
+  def get_all_images string
+    arr = []
+    linked = string.gsub( %r{http://[^\s<]+} ) do |url|
+      if url[/(?:png|jpe?g|gif|svg)$/]
+        arr << url
+      else
+        #do nothing
+      end
+    end
+    return arr
+  end
+
+  def truncate_to_first_paragraph(string)
+    return string.split("\n")[0]
+  end
 end

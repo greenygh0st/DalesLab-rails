@@ -52,4 +52,5 @@ class ApplicationController < ActionController::Base
   def word_count(string)
     words = string.split(" ")
     return words.length
+  end
 end

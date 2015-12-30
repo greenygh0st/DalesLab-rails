@@ -1,22 +1,27 @@
 <div id="posts" class="container">
   <div class="row">
     <div class="col-md-8">
+      <% inc = 0 %>
+      <% @blogs.each do |blog| %>
+      <% inc += 1 %>
+      <% if inc == 1 && blog.kind_of != "quote" %>
       <!-- Featured Post - first post -->
       <section class="col-md-12 wow fadeIn">
         <div class="post">
           <div class="row">
             <div class="col-md-6 media">
-              <img src="img/photos/DeathtoStock_EnergyandSerenity31.jpg" class="img-responsive" />
+              <img src="<%= blog.firstimage %>" class="img-responsive" />
             </div>
             <div class="col-md-6 caption">
-              <span class="post-tag">#music</span>
-              <a href="post-image.html" class="post-title">Don't look at me</a>
-              <span class="post-date">19 Sept 2015</span>
-              <p class="post-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis <a href="#">parturient montes</a>, nascetur ridiculus mus. Aenean commodo ligula eget dolor.</p>
+              <span class="post-tag"><%= blog.category %></span>
+              <a href="blogs/<%= blog.urllink %>" class="post-title"><%= blog.title %></a>
+              <span class="post-date"><%= blog.created_at %></span>
+              <p class="post-description"><%= truncate_to_first_paragraph(remove_links_and_images(blog.content)) %></p>
             </div>
           </div>
         </div>
       </section>
+      <% elsif blog.kind_of == "slideshow" && inc !=1 %>
       <!-- Slideshow -->
       <section class="col-md-6 wow fadeIn">
         <div class="post">
@@ -34,6 +39,7 @@
           </div>
         </div>
       </section>
+      <% elsif blog.kind_of == "quote" %>
       <!-- Quote -->
       <section class="col-md-6 wow fadeIn">
         <div class="quote">
@@ -50,22 +56,7 @@
           </div>
         </div>
       </section>
-
-      <section class="col-md-6 wow fadeIn">
-        <div class="post">
-          <div class="media">
-            <div id="slides-2">
-              <img src="img/photos/DeathtoStock_EnergyandSerenity6.jpg" class="img-responsive" />
-              <img src="img/photos/DeathtoStock_EnergyandSerenity2.jpg" class="img-responsive" />
-              <img src="img/photos/DeathtoStock_EnergyandSerenity1.jpg" class="img-responsive" />
-            </div>
-          </div>
-          <div class="caption text-center">
-            <a href="post-image.html" class="post-title">You're sharp alright</a>
-            <span class="post-date">6 Aug 2015</span>
-          </div>
-        </div>
-      </section>
+      <% elsif blog.kind_of == "blog" && inc !=1 %>
       <!-- short blog mason box -->
       <section class="col-md-6 wow fadeIn">
         <div class="post">
@@ -85,6 +76,7 @@
           </div>
         </div>
       </section>
+      <% elsif blog.kind_of == "singleimage" && inc !=1 %>
       <!-- single image mason block -->
       <section class="col-md-6 wow fadeIn" style="display:none;">
         <div class="post">
@@ -97,7 +89,8 @@
           </div>
         </div>
       </section>
-
+      <% end #end the if %>
+      <% end #end the each loop %>
       <div class="col-md-12">
         <div class="text-center">
           <a href="#" class="btn btn-ada-light load-more">Older posts</a>

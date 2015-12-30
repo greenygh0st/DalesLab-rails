@@ -2,4 +2,8 @@
 <h2><%= @blog.title %></h2>
 <h3>Written By: <%= @blog.user.first_name %></h3>
 <p><%= parse_links_and_images(@blog.content).html_safe %></p>
+
+<% if current_user && current_user.admin? %>
+  <p class="recipe-delete"><%= link_to "Edit", blog_path(@blog) %><p>
+<% end %>
 <p>Find me in app/views/blogs/show.html.erb</p>
