@@ -1,27 +1,45 @@
-<h1>Create a new blog post...</h1>
-
-<%= form_for @blog, url: {action: "create"} do |f| %>
-  <div class="field">
-    Title<br>
-    <%= f.text_area :title %>
+<div id="documentation">
+  <div class="container">
+    <h2>Create a new blog post</h2>
+    <div class="block">
+      <%= form_for @blog, url: {action: "create"}, html: { :class => 'form-horizontal style-form' } do |f| %>
+      <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">Post Title</label>
+        <div class="col-sm-10">
+          <%= f.text_field :title, :placeholder => "Enter a title...", :class => 'form-control'  %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">Post Sub-Title</label>
+        <div class="col-sm-10">
+          <%= f.text_field :subtitle, :placeholder => "Enter a subtitle...", :class => 'form-control'  %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">Top Image</label>
+        <div class="col-sm-10">
+          <%= f.text_field :top_image, :placeholder => "Top image (leave empty to keep blank)...", :class => 'form-control'  %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">Categories</label>
+        <div class="col-sm-10">
+          <%= f.text_field :category, :placeholder => "Categories (ie. #hacking #technology)...", :class => 'form-control'  %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">Post Content</label>
+        <div class="col-sm-10">
+          <%= f.text_area :content, :placeholder => "Enter the contact for your post here (HTML is a thing)...", :class => 'form-control'  %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">&nbsp;</label>
+        <div class="col-sm-10">
+            <%= f.submit "Create New Post", class: "btn btn-theme" %>
+          </div>
+      </div>
+      <% end %>
+    </div>
   </div>
-  <div class="field">
-    Subtitle<br>
-    <%= f.text_area :subtitle %>
-  </div>
-  <div class="field">
-    Subtitle<br>
-    <%= f.text_area :top_image %>
-  </div>
-  <div class="field">
-    Category<br>
-    <%= f.text_area :category %>
-  </div>
-  <div class="field">
-    Content<br>
-    <%= f.text_area :content %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Create" %>
-  </div>
-<% end %>
+</div>

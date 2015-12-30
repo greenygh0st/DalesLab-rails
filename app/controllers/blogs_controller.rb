@@ -42,7 +42,7 @@ class BlogsController < ApplicationController
   end
 
   def create
-    @blog = Blog.new(blog_params)
+    @blog = Blog.new(blogs_params)
     @blog.urllink = @blog.title.downcase.gsub(/[^0-9A-Za-z]/, '').str.gsub(/\s/,'-').gsub!(/[-]+/, "-") #transform to lowercase, remove special characters, swap spaces for dashes and then strip repeated dashes
     @blog.firstimage = get_first_image(@blog.content) #should work...
     #how to determine type (kind_of) of post (blog, singleimage, slideshow, quote)
