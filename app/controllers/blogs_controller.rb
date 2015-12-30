@@ -76,11 +76,6 @@ class BlogsController < ApplicationController
     end
   end
 
-  private
-  def blog_params
-    params.require(:blog).permit(:title, :subtitle, :top_image, :category, :content)
-  end
-
   def edit
     #find the post and attach it to the form
     link = params[:urllink]
@@ -119,6 +114,11 @@ class BlogsController < ApplicationController
       else
         render 'edit'
       end
+  end
+
+  private
+  def blog_params
+    params.require(:blog).permit(:title, :subtitle, :top_image, :category, :content)
   end
 
 end
