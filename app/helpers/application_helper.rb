@@ -34,6 +34,6 @@ module ApplicationHelper
   end
 
   def truncate_to_first_paragraph(string)
-    return string.split("\n")[0]
+    string = string.split("\\n")[0]
   end
 end

@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
 
   root 'blogs#index'
-  get 'blogs/:urllink' => 'blogs#show', as: :blog
-  get 'blogs/:urllink/edit' => 'blogs#edit'
   get 'blogs/create' => 'blogs#create'
   get 'blogs/new' => 'blogs#new'
-
+  get 'blogs/:urllink' => 'blogs#show', as: :blog
+  get 'blogs/:urllink/edit' => 'blogs#edit'
 
   #session routes
   get 'login' => 'sessions#new'

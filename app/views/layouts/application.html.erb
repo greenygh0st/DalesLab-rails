@@ -67,20 +67,25 @@
             <li class="dropdown-toggle"><a href="../../../">Home</a></li>
 
             <li class="dropdown-toggle"><a href="../../../about">About</a></li>
-
+            <% if current_user %>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="../../../login">Login</a></li>
+                <li><a><strong>Hey, <%= current_user.first_name %>!</a></strong></li>
+                <li class="divider"></li>
+                <li><%= link_to "Create New Post", { :controller => "blogs", :action=> "new" } %>
+                <li class="divider"></li>
+                <li><%= link_to "Log out", logout_path, method: "delete" %></li>
               </ul>
             </li>
+            <% end %>
           </ul>
         </div><!-- /.navbar-collapse -->
       </nav>
     </div>
     <!-- This is where the content will load  -->
         <%= yield %>
-    <!-- Content end here -->
+    <!-- Content ends here -->
     <!-- Here starts the footer! :) -->
     <div id="footer">
       <div id="subscribe">
@@ -88,7 +93,7 @@
 
           <div class="form-inline">
             <div class="form-group">
-              <p>Stay updated on latest updates &amp; promotions</p>
+              <p>Stay updated on all of the updates</p>
             </div>
             <div class="form-group">
               <div class="input-group">
@@ -114,6 +119,9 @@
               <li><a href="home-masonry.html">Home</a></li>
               <li><a href="page-about.html">About</a></li>
               <li><a href="page-contact.html">Contact</a></li>
+              <% if !current_user %>
+              <li> | <%= link_to "Login", 'login' %></a></li>
+            <% end %>
             </ul>
           </div>
 

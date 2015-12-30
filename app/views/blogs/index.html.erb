@@ -16,7 +16,7 @@
               <span class="post-tag"><%= blog.category %></span>
               <a href="blogs/<%= blog.urllink %>" class="post-title"><%= blog.title %></a>
               <span class="post-date"><%= blog.created_at %></span>
-              <p class="post-description"><%= truncate_to_first_paragraph(remove_links_and_images(blog.content)) %></p>
+              <p class="post-description"><%= truncate_to_first_paragraph(remove_links_and_images(blog.content)).html_safe %></p>
             </div>
           </div>
         </div>
