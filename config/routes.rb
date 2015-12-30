@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
+  #error routes
+  get '404' => 'pages#notfound'
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

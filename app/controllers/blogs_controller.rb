@@ -38,12 +38,12 @@ class BlogsController < ApplicationController
   end
 
   def new
-    @blog = Blog.new
+    @blog = Blog.new()
   end
 
   def create
-    @blog = Blog.new(blogs_params)
-    @blog.urllink = @blog.title.downcase.gsub(/[^0-9A-Za-z]/, '').str.gsub(/\s/,'-').gsub!(/[-]+/, "-") #transform to lowercase, remove special characters, swap spaces for dashes and then strip repeated dashes
+    @blog = Blog.new(blog_params)
+    @blog.urllink = @blog.title.to_s.downcase.gsub(/[^0-9A-Za-z ]/, '').gsub(' ','-').gsub(/[-]+/, "-") #transform to lowercase, remove special characters, swap spaces for dashes and then strip repeated dashes
     @blog.firstimage = get_first_image(@blog.content) #should work...
     #how to determine type (kind_of) of post (blog, singleimage, slideshow, quote)
     #blog = 1-2 photos more than 50 words in post, content field not empty
@@ -52,7 +52,7 @@ class BlogsController < ApplicationController
     #quote = content field is empty
     images_c = get_image_count(@blog.content)
     words_c = word_count(@blog.content)
-    if words == 0
+    if words_c == 0
       @blog.kind_of = "quote"
     elsif words_c > 0 && words_c <= 25 && images_c < 4
       @blog.kind_of = "singleimage"
@@ -62,15 +62,23 @@ class BlogsController < ApplicationController
       @blog.kind_of = "slideshow"
     end
 
-    @blog.published = true
+    #information that we need to update to prevent errors :)
+    @blog.views = 0
+    @blog.allow_comments = true
+    @blog.is_published = true
     @blog.user = current_user #set the current user as the blogs author
 
     if @blog.save
       #eventually trigger the notifications to others
-      redirect_to @blog, :notice => 'Blog post created successfully.'
+      redirect_to action: "show", urllink: @blog.urllink, :notice => 'Blog post created successfully.'
     else
       render 'new'
     end
+  end
+
+  private
+  def blog_params
+    params.require(:blog).permit(:title, :subtitle, :top_image, :category, :content)
   end
 
   def edit

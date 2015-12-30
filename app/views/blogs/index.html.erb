@@ -15,7 +15,7 @@
             <div class="col-md-6 caption">
               <span class="post-tag"><%= blog.category %></span>
               <a href="blogs/<%= blog.urllink %>" class="post-title"><%= blog.title %></a>
-              <span class="post-date"><%= blog.created_at %></span>
+              <span class="post-date"><%= blog.created_at.strftime('%b %d %Y').upcase %></span>
               <p class="post-description"><%= truncate_to_first_paragraph(remove_links_and_images(blog.content)).html_safe %></p>
             </div>
           </div>
@@ -23,7 +23,11 @@
       </section>
       <% elsif blog.kind_of == "slideshow" && inc !=1 %>
       <!-- Slideshow -->
+      <% if inc > 8 %>
+      <section class="col-md-6 wow fadeIn" style="display:none;">
+      <% else %>
       <section class="col-md-6 wow fadeIn">
+      <% end %>
         <div class="post">
           <div class="media">
             <div id="slides-1">
@@ -35,13 +39,17 @@
           </div>
           <div class="caption text-center">
             <a href="post-image.html" class="post-title">I'm only breathing</a>
-            <span class="post-date">6 Sept 2015</span>
+            <span class="post-date"><%= blog.created_at.strftime('%b %d %Y').upcase %></span>
           </div>
         </div>
       </section>
       <% elsif blog.kind_of == "quote" %>
       <!-- Quote -->
+      <% if inc > 8 %>
+      <section class="col-md-6 wow fadeIn" style="display:none;">
+      <% else %>
       <section class="col-md-6 wow fadeIn">
+      <% end %>
         <div class="quote">
 
           <i class="quote-left fa fa-quote-left"></i>
@@ -50,52 +58,60 @@
           <div class="text-center">
             <img src="img/matt-berninger.jpg" class="quote-face" />
             <blockquote>
-              <p>Don't look at me I'm indiscreet</p>
-              <footer>Matt Berninger</footer>
+              <p><%= blog.title %></p>
+              <footer>Dale Myszewski</footer>
             </blockquote>
           </div>
         </div>
       </section>
       <% elsif blog.kind_of == "blog" && inc !=1 %>
       <!-- short blog mason box -->
+      <% if inc > 8 %>
+      <section class="col-md-6 wow fadeIn" style="display:none;">
+      <% else %>
       <section class="col-md-6 wow fadeIn">
+      <% end %>
+
         <div class="post">
           <div class="caption">
 
             <div class="post-thumb">
-              <img src="img/photos/DeathtoStock_EnergyandSerenity31.jpg" class="img-responsive" />
+              <img src="<%= blog.firstimage %>" class="img-responsive" />
             </div>
 
-            <span class="post-tag">#music</span>
-            <a href="post-image.html" class="post-title">Leave it alone</a>
-            <p class="post-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-            <br />
-            <br />
-            Cum sociis natoque penatibus et magnis dis parturient montes magnis dis parturient montes, nascetur ridiculus mus. Aenean commodo <a href="#">ligula eget dolor</a>.</p>
-            <span class="post-date">13 June 2015</span>
+            <span class="post-tag"><%= blog.category %></span>
+            <a href="post-image.html" class="post-title"><%= blog.title %></a>
+            <p class="post-description"><%= truncate_to_first_paragraph(remove_links_and_images(blog.content)).html_safe %></p>
+            <span class="post-date"><%= blog.created_at.strftime('%b %d %Y').upcase %></span>
           </div>
         </div>
       </section>
       <% elsif blog.kind_of == "singleimage" && inc !=1 %>
       <!-- single image mason block -->
+      <% if inc > 8 %>
+      <section class="col-md-6 wow fadeIn">
+      <% else %>
       <section class="col-md-6 wow fadeIn" style="display:none;">
+      <% end %>
         <div class="post">
           <div class="media">
-            <img src="img/photos/DeathtosStockSerenity9.jpg" class="img-responsive" />
+            <img src="<%= blog.firstimage %>" class="img-responsive" />
           </div>
           <div class="caption text-center">
-            <a href="post-image.html" class="post-title">Loose lips</a>
-            <span class="post-date">3 Jan 2015</span>
+            <a href="post-image.html" class="post-title"><%= blog.title %></a>
+            <span class="post-date"><%= blog.created_at.strftime('%b %d %Y').upcase %></span>
           </div>
         </div>
       </section>
       <% end #end the if %>
       <% end #end the each loop %>
+      <% if inc > 8 %>
       <div class="col-md-12">
         <div class="text-center">
           <a href="#" class="btn btn-ada-light load-more">Older posts</a>
         </div>
       </div>
+      <% end %>
 
     </div>
 
