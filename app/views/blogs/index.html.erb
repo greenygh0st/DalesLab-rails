@@ -38,7 +38,7 @@
             </div>
           </div>
           <div class="caption text-center">
-            <a href="post-image.html" class="post-title">I'm only breathing</a>
+            <a href="blogs/<%= blog.urllink %>" class="post-title">I'm only breathing</a>
             <span class="post-date"><%= blog.created_at.strftime('%b %d %Y').upcase %></span>
           </div>
         </div>
@@ -56,7 +56,7 @@
           <i class="quote-right fa fa-quote-right"></i>
 
           <div class="text-center">
-            <img src="img/matt-berninger.jpg" class="quote-face" />
+            <img src="img/myphoto.jpg" class="quote-face" />
             <blockquote>
               <p><%= blog.title %></p>
               <footer>Dale Myszewski</footer>
@@ -80,7 +80,7 @@
             </div>
 
             <span class="post-tag"><%= blog.category %></span>
-            <a href="post-image.html" class="post-title"><%= blog.title %></a>
+            <a href="blogs/<%= blog.urllink %>" class="post-title"><%= blog.title %></a>
             <p class="post-description"><%= truncate_to_first_paragraph(remove_links_and_images(blog.content)).html_safe %></p>
             <span class="post-date"><%= blog.created_at.strftime('%b %d %Y').upcase %></span>
           </div>
@@ -98,7 +98,7 @@
             <img src="<%= blog.firstimage %>" class="img-responsive" />
           </div>
           <div class="caption text-center">
-            <a href="post-image.html" class="post-title"><%= blog.title %></a>
+            <a href="blogs/<%= blog.urllink %>" class="post-title"><%= blog.title %></a>
             <span class="post-date"><%= blog.created_at.strftime('%b %d %Y').upcase %></span>
           </div>
         </div>
@@ -125,7 +125,7 @@
             <img src="img/myphoto.jpg" class="avatar-full-width img-responsive" />
 
             <p><strong>Dale Myszewski</strong>.</p>
-            <p>Certifiable #InfoSec &amp; #WebDev guy. Full Stack Application Developer. Programmer. Gamer. Former LEO. All around Nerd. Happy Husband. Daddy. Jesus follower.<br /><b>My opinions are my own.</b></p>
+            <p>Certifiable #InfoSec &amp; #WebDev guy. Full Stack Application Developer. Programmer. Gamer. Airsofter. Former LEO. All around Nerd. Happy Husband. Daddy. Jesus follower.<br /><b>My opinions are my own.</b></p>
             <p><a class="btn btn-ada-dark" href="https://twitter.com/dalemysz" target="_blank">Get in touch</a></p>
 
           </div>

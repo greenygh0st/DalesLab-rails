@@ -5,11 +5,15 @@ Rails.application.routes.draw do
   get 'blogs/new' => 'blogs#new'
   get 'blogs/:urllink' => 'blogs#show', as: :blog
   get 'blogs/:urllink/edit' => 'blogs#edit'
+  patch 'blogs/:urllink/update' => 'blogs#update'
 
   #session routes
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
+
+  #static pages
+  get 'about' => 'pages#about'
 
   #error routes
   get '404' => 'pages#notfound'

@@ -21,7 +21,7 @@
     </div>
     <% if current_user && current_user.admin? %>
       <p class="blog-edit">
-        <a href="blogs/<%= @blog.urllink %>/edit" class="post-title">Edit This Post</a>
+        <a href="<%= @blog.urllink %>/edit" class="post-title">Edit This Post</a>
       </p>
     <% end %>
 

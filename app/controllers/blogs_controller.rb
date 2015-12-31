@@ -2,8 +2,8 @@ class BlogsController < ApplicationController
   before_action :require_admin, only: [:new, :create, :edit, :update]
 
   def index
-    @blogs = Blog.all
-    @popularblogs = @blogs.take(3).sort_by do |item|
+    @blogs = Blog.all.order('created_at DESC')
+    @popularblogs = @blogs.where(["kind_of != ? ", "quote"]).take(3).sort_by do |item|
       item[:views]
     end
     #need to get the top 5 most common tags
@@ -43,7 +43,7 @@ class BlogsController < ApplicationController
 
   def create
     @blog = Blog.new(blog_params)
-    @blog.urllink = @blog.title.to_s.downcase.gsub(/[^0-9A-Za-z ]/, '').gsub(' ','-').gsub(/[-]+/, "-") #transform to lowercase, remove special characters, swap spaces for dashes and then strip repeated dashes
+    @blog.urllink = @blog.title.downcase.gsub(/[^0-9A-Za-z ]/, '').sub(/\s+\Z/, "").gsub(' ','-').gsub(/[-]+/, "-") #transform to lowercase, remove special characters, swap spaces for dashes and then strip repeated dashes
     @blog.firstimage = get_first_image(@blog.content) #should work...
     #how to determine type (kind_of) of post (blog, singleimage, slideshow, quote)
     #blog = 1-2 photos more than 50 words in post, content field not empty
@@ -88,17 +88,16 @@ class BlogsController < ApplicationController
     @blog = Blog.find_by urllink: link
 
     #update the things we deterine
-
-    @blog.urllink = @blog.title.downcase.gsub(/[^0-9A-Za-z]/, '').str.gsub(/\s/,'-').gsub!(/[-]+/, "-") #transform to lowercase, remove special characters, swap spaces for dashes and then strip repeated dashes
-    @blog.firstimage = get_first_image(@blog.content) #should work...
+    @blog.urllink = blog_params[:title].downcase.gsub(/[^0-9A-Za-z ]/, '').sub(/\s+\Z/, "").gsub(' ','-').gsub(/[-]+/, "-") #transform to lowercase, remove special characters, swap spaces for dashes and then strip repeated dashes
+    @blog.firstimage = get_first_image(blog_params[:content]) #should work...
     #how to determine type (kind_of) of post (blog, singleimage, slideshow, quote)
     #blog = 1-2 photos more than 50 words in post, content field not empty
     #single image = 1-2 photos less than 50 words in post, content field not empty
     #slideshow = more than 4 photos in a post, content field not empty
     #quote = content field is empty
-    images_c = get_image_count(@blog.content)
-    words_c = word_count(@blog.content)
-    if words == 0
+    images_c = get_image_count(blog_params[:content])
+    words_c = word_count(blog_params[:content])
+    if words_c == 0
       @blog.kind_of = "quote"
     elsif words_c > 0 && words_c <= 25 && images_c < 4
       @blog.kind_of = "singleimage"
@@ -107,10 +106,10 @@ class BlogsController < ApplicationController
     elsif words_c > 0 && images_c >= 4
       @blog.kind_of = "slideshow"
     end
-
-    #@blog.user = current_user #set the current user as the blogs author
-      if @recipe.update(recipe_params)
-        redirect_to @recipe, :notice => 'Blog post updated successfully.'
+    #err
+    #@blog.user = current_user #set the current user as the blogs author - should do an edited by thing later
+      if @blog.update_attributes(blog_params)
+        redirect_to action: "show", urllink: @blog.urllink, :notice => 'Blog post updated successfully.'
       else
         render 'edit'
       end
