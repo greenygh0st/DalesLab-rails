@@ -6,7 +6,7 @@ class BlogsController < ApplicationController
     @popularblogs = @blogs.where(["kind_of != ? ", "quote"]).take(3).sort_by do |item|
       item[:views]
     end
-    #need to get the top 5 most common tags
+    #need to get the top 5 most common tags - histogram time!! :D
       rawtags = []
       tags = Hash.new(0)
 
@@ -15,7 +15,7 @@ class BlogsController < ApplicationController
       end
 
       rawtags.each do |tag|
-          tags[tag] += 1 #key is the word, count is the value
+          tags[tag] += 1 #key is the tag, count is the value
       end
 
       tags = tags.sort_by do |tag, count|
@@ -32,9 +32,14 @@ class BlogsController < ApplicationController
 
   def show
     link = params[:urllink]
-    @blog = Blog.find_by urllink: link
-    @blog.views += 1 #update the number of post views by one
-    @blog.save #if the save doesn't work just ignore it for now
+    if /^[a-z0-9-]+$/.match(link) == nil #SQL injection prevention - if the string contains anything not in the usual format commence freakout
+      #
+      redirect_to :controller => 'pages', :action => 'secviolation'
+    else
+      @blog = Blog.find_by urllink: link
+      @blog.views += 1 #update the number of post views by one
+      @blog.save #if the save doesn't work just ignore it for now
+    end
   end
 
   def new
@@ -60,6 +65,8 @@ class BlogsController < ApplicationController
       @blog.kind_of = "blog"
     elsif words_c > 0 && images_c >= 4
       @blog.kind_of = "slideshow"
+    else
+      @blog.kind_of = "blog" #in case somehow we miss one of the other conditions. :)
     end
 
     #information that we need to update to prevent errors :)

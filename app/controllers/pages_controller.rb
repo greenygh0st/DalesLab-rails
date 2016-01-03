@@ -4,7 +4,10 @@ class PagesController < ApplicationController
 
   def contact
   end
-  
+
   def notfound
+  end
+
+  def secviolation
   end
 end

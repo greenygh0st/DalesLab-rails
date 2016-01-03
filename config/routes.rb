@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   #error routes
   get '404' => 'pages#notfound'
+  get 'secviolation' => 'pages#secviolation'
 
 
 
