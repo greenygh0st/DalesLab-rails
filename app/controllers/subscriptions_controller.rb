@@ -11,7 +11,7 @@ class SubscriptionsController < ApplicationController
     else
       if @subscription.save
         #email the user through send grid here
-        send_email(@subscription.email, "Email Verification", "<h1>Evamil Verification</h1>Thank you for signing up to recieve my updates! Click <a href=\"http://localhost:3000/subscription/#{@subscription.verification_string}/verify\">here</a> to recieve update emails.")
+        send_email(@subscription.email, "Email Verification", "<h1>Email Verification</h1><p>Thank you for signing up to receive my updates! Click <a href=\"http://localhost:3000/subscription/#{@subscription.verification_string}/verify\">here</a> to recieve update emails.</p><p>Thanks again!</p>")
         render 'verification'
       end
     end
@@ -45,6 +45,7 @@ class SubscriptionsController < ApplicationController
 
     if @subscription.delete
       #email the user through send grid here
+      send_email(@subscription.email, "Dale's Lab Subscription Removal Confirmation", "<h1>Subscription Removal Confirmation</h1><p>This is to confirm that your email has been removed from our subscriptions system.</p><p>Sorry to see you go!</p>")
       flash[:success] = "Subscription for #{@email} removed."
       redirect_to :controller => 'blogs', :action => 'index'
     else

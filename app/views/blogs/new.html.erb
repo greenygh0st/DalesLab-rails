@@ -30,7 +30,7 @@
       <div class="form-group">
         <label class="col-sm-2 col-sm-2 control-label">Post Content</label>
         <div class="col-sm-10">
-          <%= f.text_area :content, :placeholder => "Enter the contact for your post here (HTML is a thing)...", :class => 'form-control'  %>
+          <%= f.text_area :content, :placeholder => "Enter the contact for your post here (HTML is a thing)...", :class => 'form-control expand'  %>
         </div>
       </div>
       <div class="form-group">
@@ -43,3 +43,7 @@
     </div>
   </div>
 </div>
+<script src="../../../../js/textarea-expander.js"></script>
+<script>
+		autosize(document.querySelectorAll('textarea'));
+</script>

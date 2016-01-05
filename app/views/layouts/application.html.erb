@@ -27,7 +27,6 @@
     <link href="../../../../css/ada.css" rel="stylesheet">
     <link href="../../../../css/ada-themes.css" rel="stylesheet">
     <link href="../../../../css/custom.css" rel="stylesheet">
-
     <!-- HTML5 shiv for IE8 support -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -73,7 +72,8 @@
               <ul class="dropdown-menu">
                 <li><a><strong>Hey, <%= current_user.first_name %>!</a></strong></li>
                 <li class="divider"></li>
-                <li><%= link_to "Create New Post", { :controller => "blogs", :action=> "new" } %>
+                <li><%= link_to "All Posts", { :controller => "blogs", :action => "admin_list" } %></li>
+                <li><%= link_to "Create New Post", { :controller => "blogs", :action => "new" } %>
                 <li class="divider"></li>
                 <li><%= link_to "Log out", logout_path, method: "delete" %></li>
               </ul>
@@ -131,9 +131,9 @@
 
           <div class="col-md-2">
             <ul class="list-inline">
-              <li><a href="#"><i class="fa fa-github"></i></a></li>
-              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-              <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+              <li><a href="https://github.com/greenygh0st"><i class="fa fa-github"></i></a></li>
+              <li><a href="https://twitter.com/dalemysz"><i class="fa fa-twitter"></i></a></li>
+              <!--<li><a href="#"><i class="fa fa-instagram"></i></a></li>-->
             </ul>
           </div>
 

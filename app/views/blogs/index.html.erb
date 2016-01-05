@@ -15,7 +15,7 @@
             <div class="col-md-6 caption">
               <span class="post-tag"><%= blog.category %></span>
               <a href="blogs/<%= blog.urllink %>" class="post-title"><%= blog.title %></a>
-              <span class="post-date"><%= blog.created_at.strftime('%b %d %Y').upcase %></span>
+              <span class="post-date"><%= blog.published_at.strftime('%b %d %Y').upcase %></span>
               <p class="post-description"><%=  blog.subtitle %></p>
             </div>
           </div>
@@ -39,7 +39,7 @@
           </div>
           <div class="caption text-center">
             <a href="blogs/<%= blog.urllink %>" class="post-title">I'm only breathing</a>
-            <span class="post-date"><%= blog.created_at.strftime('%b %d %Y').upcase %></span>
+            <span class="post-date"><%= blog.published_at.strftime('%b %d %Y').upcase %></span>
           </div>
         </div>
       </section>
@@ -82,7 +82,7 @@
             <span class="post-tag"><%= blog.category %></span>
             <a href="blogs/<%= blog.urllink %>" class="post-title"><%= blog.title %></a>
             <p class="post-description"><%=  blog.subtitle %></p>
-            <span class="post-date"><%= blog.created_at.strftime('%b %d %Y').upcase %></span>
+            <span class="post-date"><%= blog.published_at.strftime('%b %d %Y').upcase %></span>
           </div>
         </div>
       </section>
@@ -99,7 +99,7 @@
           </div>
           <div class="caption text-center">
             <a href="blogs/<%= blog.urllink %>" class="post-title"><%= blog.title %></a>
-            <span class="post-date"><%= blog.created_at.strftime('%b %d %Y').upcase %></span>
+            <span class="post-date"><%= blog.published_at.strftime('%b %d %Y').upcase %></span>
           </div>
         </div>
       </section>

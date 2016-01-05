@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   root 'blogs#index'
+  get 'blogs/allposts' => 'blogs#admin_list'
   post 'blogs/create' => 'blogs#create'
   get 'blogs/new' => 'blogs#new'
   get 'blogs/:urllink' => 'blogs#show', as: :blog

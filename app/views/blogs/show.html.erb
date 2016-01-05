@@ -3,14 +3,16 @@
     <div class="post">
       <!-- Top image would go here -->
       <% if @blog.top_image != "" %>
-      <div style=""></div>
-      <img src="<%= @blog.top_image %>" class="img-responsive" />
+      <div style="background:url('<%=@blog.top_image%>');background-size:cover;height:350px;" class="image-responsive"></div>
       <% end %>
 
       <div class="caption">
         <div class="header">
           <span class="post-tag"><%= @blog.category %></span>
           <h1><%= @blog.title %></h1>
+          <% if @blog.published_at != nil %>
+          <%= @blog.published_at.strftime('%b %d %Y').upcase %><br />
+          <% end %>
           Written By: <%= @blog.user.first_name %>
         </div>
         <!-- Post Content -->
