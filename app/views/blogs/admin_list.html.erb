@@ -1,0 +1,19 @@
+<div id="documentation">
+  <div class="container">
+    <h2>All Posts (Admin View)</h2>
+    <div class="block">
+      <% @blogs.each do |blog| %>
+      <div class="admin-post">
+        <a href="../../../../blogs/<%= blog.urllink %>/edit">
+          <h3><%= blog.title %></h3>
+          <h4>Created on: <%= blog.created_at.strftime('%b %d %Y').upcase %></h4>
+          <%= blog.subtitle %>
+        </a>
+        <hr>
+      </div>
+      <% end %>
+    </div>
+  <!-- -->
+  </div>
+</div>
+<script src="../../../../js/textarea-expander.js"></script>
