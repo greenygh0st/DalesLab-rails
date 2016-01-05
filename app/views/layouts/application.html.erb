@@ -90,21 +90,22 @@
     <div id="footer">
       <div id="subscribe">
         <div class="container">
-
+          <% @subscription = Subscription.new() %>
+          <%= form_for @subscription, url: {controller: "subscriptions", action: "create"}, html: { } do |f| %>
           <div class="form-inline">
             <div class="form-group">
               <p>Stay updated on all of the updates</p>
             </div>
             <div class="form-group">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Your email address">
+                <%= f.text_field :email, :class => 'form-control', :placeholder => 'Your email address' %>
                 <span class="input-group-btn">
-                  <button class="btn btn-ada-dark" type="button">Subscribe</button>
+                  <%= f.submit "Subscribe", class: "btn btn-ada-dark" %>
                 </span>
               </div>
             </div>
           </div>
-
+          <% end %>
         </div>
       </div>
       <div id="links">

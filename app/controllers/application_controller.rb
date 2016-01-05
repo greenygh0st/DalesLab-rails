@@ -53,4 +53,26 @@ class ApplicationController < ActionController::Base
     words = string.split(" ")
     return words.length
   end
+
+  def send_email(to, subject, message)
+    # or as a block with the API key only #
+    client = SendGrid::Client.new do |c|
+      c.api_key = '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' #need to get from env variable on production
+    end
+    mail = SendGrid::Mail.new do |m|
+      m.to = to
+      m.from = 'noreply@daleslab.com'
+      m.subject = subject
+      m.text = message
+    end
+
+    res = client.send(mail)
+
+    if res.code == 200
+      return true
+    else
+      return false
+    end
+  end
+
 end

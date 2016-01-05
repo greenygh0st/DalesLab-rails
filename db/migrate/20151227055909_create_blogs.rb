@@ -17,6 +17,8 @@ class CreateBlogs < ActiveRecord::Migration
       t.string :firstimage
 
       t.references :user
+
+      t.datetime :published_at
       t.timestamps null: false
     end
   end

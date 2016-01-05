@@ -12,6 +12,9 @@ RUN apt-get install -qq -y mysql-server mysql-client libmysqlclient-dev
 ADD Gemfile /app/Gemfile
 ADD Gemfile.lock /app/Gemfile.lock
 RUN bundle install --without development test
+RUN bundle exec rake db:migrate RAILS_ENV=production
+RUN bundle exec rake db:seed RAILS_ENV=production
+RUN bundle exec rake assets:precompile RAILS_ENV=production
 ADD . /app
 
 #(required) nginx port number

@@ -69,6 +69,14 @@ class BlogsController < ApplicationController
       @blog.kind_of = "blog" #in case somehow we miss one of the other conditions. :)
     end
 
+    #should we publish this and notify people??
+    if @blog.is_published
+      @blog.published_at == Time.now
+      #notify people
+      #get subscriptions
+      #send grid stuff here
+    end
+
     #information that we need to update to prevent errors :)
     @blog.views = 0
     @blog.allow_comments = true

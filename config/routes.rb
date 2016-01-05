@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   get 'blogs/:urllink/edit' => 'blogs#edit'
   patch 'blogs/:urllink/update' => 'blogs#update'
 
+  #subscription routes
+  post 'subscription/create' => 'subscriptions#create'
+  get 'subscription/:verify/verify' => 'subscriptions#verify'
+  get 'subscription/:verify/delete' => 'subscriptions#delete'
+
   #session routes
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'

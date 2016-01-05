@@ -162,7 +162,7 @@ ul {
 /***********************************************
 * Scroll to top
 ***********************************************/
-#scroll-to-top {  
+#scroll-to-top {
   position: fixed;
   right: 24px;
   bottom: 40px;
@@ -435,7 +435,7 @@ fieldset[disabled] .navbar-ada .btn-link:focus {
   background: #fff;
   margin: 20px;
   height: auto;
-  
+
   overflow: hidden;
 
   -webkit-box-shadow: 0px 3px 4px 0px rgba(0,0,0,0.03);
@@ -737,7 +737,7 @@ fieldset[disabled] .navbar-ada .btn-link:focus {
   background-position: 0 0;
 }
 
-#styles .style .header:hover {  
+#styles .style .header:hover {
  background-position: 0 100%;
 }
 

@@ -27,14 +27,19 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'nokogiri'
-#mysql gem
-#gem 'mysql2'
 
 # Use Unicorn as the app server
 gem 'unicorn'
 
+# SendGrid for sending emails
+gem 'sendgrid-ruby'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+#mysql gem - comment this out when not in production - need a seperate branch for this
+#gem 'mysql2'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
