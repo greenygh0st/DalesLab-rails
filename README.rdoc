@@ -1,5 +1,12 @@
 == README
 
+To this up and running use Docker:
+# build your dockerfile
+$ docker build -t daleslab/site .
+
+# run container
+$ docker run -d -p 80:80 -e SECRET_KEY_BASE=secretkey your/project
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
