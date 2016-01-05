@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   patch 'blogs/:urllink/update' => 'blogs#update'
 
   #subscription routes
+  get 'subscription/already_exists' => 'subscriptions#already_exists'
   post 'subscription/create' => 'subscriptions#create'
   get 'subscription/:verify/verify' => 'subscriptions#verify'
   get 'subscription/:verify/delete' => 'subscriptions#delete'

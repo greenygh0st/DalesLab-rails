@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20151228033331) do
     t.string   "urllink"
     t.string   "firstimage"
     t.integer  "user_id"
+    t.datetime "published_at"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end

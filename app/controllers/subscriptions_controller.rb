@@ -7,10 +7,11 @@ class SubscriptionsController < ApplicationController
     exists = Subscription.find_by verification_string: @subscription.verification_string
 
     if exists != nil #make sure it doesn't already exist people dont need to be getting duplicate emails
-      render 'aready_exists'
+      render 'already_exists'
     else
       if @subscription.save
         #email the user through send grid here
+        send_email(@subscription.email, "Email Verification", "<h1>Evamil Verification</h1>Thank you for signing up to recieve my updates! Click <a href=\"http://localhost:3000/subscription/#{@subscription.verification_string}/verify\">here</a> to recieve update emails.")
         render 'verification'
       end
     end
@@ -18,7 +19,7 @@ class SubscriptionsController < ApplicationController
 
   def verify #subscriptions/:verify/verify
     email_hash = params[:verify]
-    if /^[a-z0-9]+$/.match(email_hash)
+    if /^[a-z0-9]+$/.match(email_hash) == nil
       #sec violation
       redirect_to :controller => 'pages', :action => 'secviolation'
     end
@@ -28,11 +29,13 @@ class SubscriptionsController < ApplicationController
       @subscription.verified = true
       if @subscription.save
         #email the user through send grid here
-        render 'verify_success'
+        flash[:success] = "Your email #{@subscription.email} has been verified. Thanks for subscribing!"
+        redirect_to :controller => 'blogs', :action => 'index'
       end
     else
       #subscription does not exist
-      render 'no_subscription'
+      flash[:error] = "Email subscription not found."
+      redirect_to :controller => 'blogs', :action => 'index'
     end
   end
 
@@ -42,9 +45,11 @@ class SubscriptionsController < ApplicationController
 
     if @subscription.delete
       #email the user through send grid here
-      render 'sub_removed'
+      flash[:success] = "Subscription for #{@email} removed."
+      redirect_to :controller => 'blogs', :action => 'index'
     else
-      render 'no_subscription'
+      flash[:error] = "This subscription does not exist. Probably because it was already removed."
+      redirect_to :controller => 'blogs', :action => 'index'
     end
   end
 

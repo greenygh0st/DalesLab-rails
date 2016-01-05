@@ -55,15 +55,15 @@ class ApplicationController < ActionController::Base
   end
 
   def send_email(to, subject, message)
-    # or as a block with the API key only #
+    # API key only #
     client = SendGrid::Client.new do |c|
-      c.api_key = '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' #need to get from env variable on production
+      c.api_key = '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' #need to get from env variable on production...maybe?
     end
     mail = SendGrid::Mail.new do |m|
       m.to = to
       m.from = 'noreply@daleslab.com'
       m.subject = subject
-      m.text = message
+      m.html = message
     end
 
     res = client.send(mail)

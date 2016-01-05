@@ -83,6 +83,9 @@
         </div><!-- /.navbar-collapse -->
       </nav>
     </div>
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
     <!-- This is where the content will load  -->
         <%= yield %>
     <!-- Content ends here -->
