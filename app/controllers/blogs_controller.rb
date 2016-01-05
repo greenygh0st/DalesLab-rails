@@ -41,7 +41,9 @@ class BlogsController < ApplicationController
       redirect_to :controller => 'pages', :action => 'secviolation'
     else
       @blog = Blog.find_by urllink: link
-      @blog.views += 1 #update the number of post views by one
+      if @blog.is_published
+        @blog.views += 1 #update the number of post views by one
+      end
       @blog.save #if the save doesn't work just ignore it for now
     end
   end
