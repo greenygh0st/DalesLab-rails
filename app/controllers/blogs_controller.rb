@@ -37,7 +37,7 @@ class BlogsController < ApplicationController
   def show
     link = params[:urllink]
     if /^[a-z0-9-]+$/.match(link) == nil #SQL injection prevention - if the string contains anything not in the usual format commence freakout
-      #
+      #freakout
       redirect_to :controller => 'pages', :action => 'secviolation'
     else
       @blog = Blog.find_by urllink: link
