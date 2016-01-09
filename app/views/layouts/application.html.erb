@@ -63,9 +63,11 @@
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse" id="navbar-collapse-1">
           <ul class="nav navbar-nav">
+            <!-- Top Menu Items -->
             <li class="dropdown-toggle"><a href="../../../">Home</a></li>
-
             <li class="dropdown-toggle"><a href="../../../about">About</a></li>
+            <li class="dropdown-toggle"><a href="../../../portfolio">Portfolio</a></li>
+
             <% if current_user %>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
@@ -74,6 +76,8 @@
                 <li class="divider"></li>
                 <li><%= link_to "All Posts", { :controller => "blogs", :action => "admin_list" } %></li>
                 <li><%= link_to "Create New Post", { :controller => "blogs", :action => "new" } %>
+                <li class="divider"></li>
+                <li><%= link_to "New Portfolio Item", { :controller => "portfolio", :action => "new" } %></li>
                 <li class="divider"></li>
                 <li><%= link_to "Log out", logout_path, method: "delete" %></li>
               </ul>

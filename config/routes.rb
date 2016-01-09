@@ -8,6 +8,13 @@ Rails.application.routes.draw do
   get 'blogs/:urllink/edit' => 'blogs#edit'
   patch 'blogs/:urllink/update' => 'blogs#update'
 
+  #Portfolio
+  get 'portfolio' => 'portfolio#index'
+  get 'portfolio/new' => 'portfolio#new'
+  post 'portfolio/create' => 'portfolio#create'
+  get 'portfolio/:id/edit' => 'portfolio#edit'
+  patch 'portfolio/:id/update' => 'portfolio#update'
+
   #subscription routes
   get 'subscription/already_exists' => 'subscriptions#already_exists'
   post 'subscription/create' => 'subscriptions#create'

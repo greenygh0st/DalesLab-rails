@@ -1,4 +1,7 @@
 class PortfolioController < ApplicationController
+#this is pretty much a straight up rails conventions driven controller..nothing too crazy here. :)
+  before_action :require_admin, only: [:new, :create, :edit, :update]
+  
   def index
     @portfolio_items = Portfolio.all
   end
@@ -32,6 +35,6 @@ class PortfolioController < ApplicationController
 
   private
   def portfolio_params
-    params.require(:portfolio).permit(:title, :image, :description, :link)
+    params.require(:portfolio).permit(:title, :image, :category, :description, :link)
   end
 end
