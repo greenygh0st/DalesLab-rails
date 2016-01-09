@@ -1,9 +1,9 @@
 class PortfolioController < ApplicationController
 #this is pretty much a straight up rails conventions driven controller..nothing too crazy here. :)
   before_action :require_admin, only: [:new, :create, :edit, :update]
-  
+
   def index
-    @portfolio_items = Portfolio.all
+    @portfolio_items = Portfolio.all.order('created_at DESC')
   end
 
   def new
