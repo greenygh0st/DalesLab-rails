@@ -1,8 +1,8 @@
 <div id="documentation">
   <div class="container">
-    <h2>Create a new blog post</h2>
+    <h2>Edit portfolio item: <%= @portfolio.title %> </h2>
     <div class="block">
-      <%= form_for @blog, url: {action: "create"}, html: { :class => 'form-horizontal style-form' } do |f| %>
+      <%= form_for @portfolio, url: {action: "create"}, html: { :class => 'form-horizontal style-form' } do |f| %>
       <div class="form-group">
         <label class="col-sm-2 col-sm-2 control-label">Post Title</label>
         <div class="col-sm-10">
@@ -12,37 +12,31 @@
       <div class="form-group">
         <label class="col-sm-2 col-sm-2 control-label">Post Sub-Title</label>
         <div class="col-sm-10">
-          <%= f.text_field :subtitle, :placeholder => "Enter a subtitle...", :class => 'form-control'  %>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-2 col-sm-2 control-label">Top Image</label>
-        <div class="col-sm-10">
-          <%= f.text_field :top_image, :placeholder => "Top image (leave empty to keep blank)...", :class => 'form-control'  %>
+          <%= f.text_field :image, :placeholder => "Enter an image url...", :class => 'form-control'  %>
         </div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 col-sm-2 control-label">Categories</label>
         <div class="col-sm-10">
-          <%= f.text_field :category, :placeholder => "Categories (ie. #hacking #technology)...", :class => 'form-control'  %>
+          <%= f.text_field :category, :placeholder => "Categories (ie. #website #software, #etc)...", :class => 'form-control'  %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">Top Image</label>
+        <div class="col-sm-10">
+          <%= f.text_area :link, :placeholder => "Enter a link to the live item....(if applicable)", :class => 'form-control'  %>
         </div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 col-sm-2 control-label">Post Content</label>
         <div class="col-sm-10">
-          <%= f.text_area :content, :placeholder => "Enter the content for your post here (HTML is a thing)...", :class => 'form-control expand'  %>
+          <%= f.text_area :description, :placeholder => "Enter a description for the portfolio item...", :class => 'form-control expand'  %>
         </div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 col-sm-2 control-label">&nbsp;</label>
         <div class="col-sm-10">
-          <%= f.check_box :is_published %> <label for="blog_is_published">Publish to Public?</label>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-2 col-sm-2 control-label">&nbsp;</label>
-        <div class="col-sm-10">
-            <%= f.submit "Create New Post", class: "btn btn-theme" %>
+            <%= f.submit "Create New Portfolio Item", class: "btn btn-theme" %>
           </div>
       </div>
       <% end %>

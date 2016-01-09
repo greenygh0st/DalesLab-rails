@@ -31,7 +31,7 @@ class BlogsController < ApplicationController
   end
 
   def admin_list
-    @blogs = Blog.all
+    @blogs = Blog.all.order('created_at DESC')
   end
 
   def show
@@ -76,7 +76,7 @@ class BlogsController < ApplicationController
     end
 
     #should we publish this and notify people??
-    if @blog.is_published && @blog.published_at == nil
+    if @blog.is_published && (@blog.published_at == nil || @blog.published_at == 0)
       @blog.published_at == Time.now
       #notify people
       #get subscriptions
@@ -84,10 +84,9 @@ class BlogsController < ApplicationController
         @subscriptions = Subscription.all()
         #send grid stuff here
         @subscriptions.each do |subscription|
-          send_email(@subscription.email, "Dale's Lab - New Post", "<h1>There is a new post on Dale's Lab!</h1><p>There is a new post titled <strong></strong> on Dale's Lab. You should go and check it out!</p><h6>You are receiving this email because you are because you are subscribed to new posts from Dale's Lab. If this is in error please click <a href=\"http://localhost:3000/subscription/#{@subscription.verification_string}/delete\">here</a>.</h6>")
+          send_email(subscription.email, "Dale's Lab - New Post", "<h1>There is a new post on Dale's Lab!</h1><p>There is a new post titled <strong>#{@blog.title}</strong> on Dale's Lab. You should go and check it out!</p><h6>You are receiving this email because you are because you are subscribed to new posts from Dale's Lab. If this is in error please click <a href=\"http://localhost:3000/subscription/#{subscription.verification_string}/delete\">here</a>.</h6>")
         end
       end
-
     end
 
     #information that we need to update to prevent errors :)
@@ -108,6 +107,7 @@ class BlogsController < ApplicationController
     #find the post and attach it to the form
     link = params[:urllink]
     @blog = Blog.find_by urllink: link
+    #err
   end
 
   def update
@@ -138,7 +138,7 @@ class BlogsController < ApplicationController
     end
     #err
     #should we publish this and notify people??
-    if @blog.is_published && @blog.published_at == nil
+    if @blog.is_published && (@blog.published_at == nil || @blog.published_at == 0)
       @blog.published_at == Time.now
       #notify people
       #get subscriptions
@@ -146,11 +146,11 @@ class BlogsController < ApplicationController
         @subscriptions = Subscription.all()
         #send grid stuff here
         @subscriptions.each do |subscription|
-          send_email(@subscription.email, "Dale's Lab - New Post", "<h1>There is a new post on Dale's Lab!</h1><p>There is a new post titled <strong></strong> on Dale's Lab. You should go and check it out!</p><h6>You are receiving this email because you are because you are subscribed to new posts from Dale's Lab. If this is in error please click <a href=\"http://localhost:3000/subscription/#{@subscription.verification_string}/delete\">here</a>.</h6>")
+          send_email(subscription.email, "Dale's Lab - New Post", "<h1>There is a new post on Dale's Lab!</h1> <p>There is a new post titled <strong>#{@blog.title}</strong> on Dale's Lab. You should go and check it out!</p><h6>You are receiving this email because you are because you are subscribed to new posts from Dale's Lab. If this is in error please click <a href=\"http://localhost:3000/subscription/#{subscription.verification_string}/delete\">here</a>.</h6>")
         end
       end
-
     end
+
     #@blog.user = current_user #set the current user as the blogs author - should do an edited by thing later
     if @blog.update_attributes(blog_params)
       redirect_to action: "show", urllink: @blog.urllink, :notice => 'Blog post updated successfully.'
@@ -162,7 +162,7 @@ class BlogsController < ApplicationController
 
   private
   def blog_params
-    params.require(:blog).permit(:title, :subtitle, :top_image, :category, :content)
+    params.require(:blog).permit(:title, :subtitle, :top_image, :category, :content, :is_published)
   end
 
 end
