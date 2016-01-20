@@ -3,11 +3,13 @@
 To this up and running use Docker:
 # build your dockerfile
 
-$ docker build -t daleslab/site .
+$ docker build -t daleslab/image .
 
 # run container
 
-$ docker run -d -p 8080:80 -e SECRET_KEY_BASE=secretkey your/project
+$ docker run -d -p 8080:80 -e SECRET_KEY_BASE=secretkey -e DALESLAB_SQLPASS=sqlpass daleslab/site | docker build -
+
+docker run -e FOO=bar builder_image | docker build -
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
