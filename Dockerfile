@@ -8,6 +8,9 @@ RUN apt-get update
 RUN apt-get -qq -y install libmagickwand-dev imagemagick
 RUN apt-get install -qq -y mysql-server mysql-client libmysqlclient-dev
 
+ENV DALESLAB_SQLPASS=9n6tkHc8yPYxZm8D
+ENV SECRET_KEY_BASE=6m9YdRTnXNKUgKzB7mapsZa3PBXoJCkoLMLsihGZAzoYKjnCUL
+
 #(required) Install Rails App
 ADD Gemfile /app/Gemfile
 ADD Gemfile.lock /app/Gemfile.lock
