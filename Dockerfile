@@ -18,9 +18,9 @@ ADD . /app
 WORKDIR /app
 
 RUN bundle install --without development test
+RUN bundle exec rake assets:precompile RAILS_ENV=production
 RUN bundle exec rake db:migrate RAILS_ENV=production
 RUN bundle exec rake db:seed RAILS_ENV=production
-RUN bundle exec rake assets:precompile RAILS_ENV=production
 
 #(required) nginx port number
 EXPOSE 80
