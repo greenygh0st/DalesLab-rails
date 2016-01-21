@@ -26,27 +26,15 @@ class ApplicationController < ActionController::Base
   end
 
   def get_first_image string
-    images = []
-    linked = string.gsub( %r{http://[^\s<]+} ) do |url|
-      if url[/(?:png|jpe?g|gif|svg)$/]
-        images << url
-      else
-        #do nothing
-      end
-    end
-    string = images[0]
+    doc = Nokogiri::HTML( string )
+    img_srcs = doc.css('img').map{ |i| i['src'] }
+    string = img_srcs[0]
   end
 
   def get_image_count(string)
-    count = 0
-    linked = string.gsub( %r{http://[^\s<]+} ) do |url|
-      if url[/(?:png|jpe?g|gif|svg)$/]
-        count += 1
-      else
-        #do nothing
-      end
-    end
-    return count
+    doc = Nokogiri::HTML( string )
+    img_srcs = doc.css('img').map{ |i| i['src'] }
+    return img_srcs.count
   end
 
   def word_count(string)
