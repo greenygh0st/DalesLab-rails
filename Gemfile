@@ -38,7 +38,7 @@ gem 'sendgrid-ruby'
 # gem 'capistrano-rails', group: :development
 
 #mysql gem - comment this out when not in production - need a seperate branch for this
-gem 'mysql2'
+gem 'mysql2', '~> 0.4.2'
 
 
 group :development, :test do
