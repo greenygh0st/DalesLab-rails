@@ -14,12 +14,12 @@ ENV SECRET_KEY_BASE=6m9YdRTnXNKUgKzB7mapsZa3PBXoJCkoLMLsihGZAzoYKjnCUL
 #(required) Install Rails App
 ADD Gemfile /app/Gemfile
 ADD Gemfile.lock /app/Gemfile.lock
-WORKDIR /app
 RUN bundle install --without development test
+ADD . /app
+WORKDIR /app
 RUN bundle exec rake db:migrate RAILS_ENV=production
 RUN bundle exec rake db:seed RAILS_ENV=production
 RUN bundle exec rake assets:precompile RAILS_ENV=production
-ADD . /app
 
 #(required) nginx port number
 EXPOSE 80
