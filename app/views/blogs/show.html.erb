@@ -16,7 +16,7 @@
           Written By: <%= @blog.user.first_name %>
         </div>
         <!-- Post Content -->
-        <%= parse_line_breaks(parse_links_and_images(@blog.content)).html_safe %>
+        <%= parse_line_breaks(@blog.content).html_safe %>
         <!-- Post Content Ends -->
 
       </div>
