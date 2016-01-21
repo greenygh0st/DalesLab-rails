@@ -19,11 +19,11 @@ development:
 test:
   <<: *default
   database: db/test.sqlite3
-
+ #<%= ENV["DALESLAB_SQLPASS"] %>
 production:
   host: 192.241.180.82
   adapter:  mysql2
   encoding: utf8
   database: daleslab-production
   username: daleslab-usr
-  password: 9n6tkHc8yPYxZm8D #<%= ENV["DALESLAB_SQLPASS"] %>
+  password: 9n6tkHc8yPYxZm8D
