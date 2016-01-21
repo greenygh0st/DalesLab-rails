@@ -2,8 +2,8 @@ class BlogsController < ApplicationController
   before_action :require_admin, only: [:new, :create, :edit, :update]
 
   def index
-    @blogs = Blog.where(["is_published == ?", true]).order('created_at DESC')
-    @popularblogs = @blogs.where(["kind_of != ? and is_published == ?", "quote", true]).take(3).sort_by do |item|
+    @blogs = Blog.where(["is_published = ?", true]).order('created_at DESC')
+    @popularblogs = @blogs.where(["kind_of != ? and is_published = ?", "quote", true]).take(3).sort_by do |item|
       item[:views]
     end
     #need to get the top 5 most common tags - histogram time!! :D
