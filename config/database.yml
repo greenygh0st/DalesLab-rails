@@ -26,4 +26,4 @@ production:
   encoding: utf8
   database: daleslab-production
   username: daleslab-usr
-  password: <%= ENV["DALESLAB_SQLPASS"] %>
+  password: 9n6tkHc8yPYxZm8D #<%= ENV["DALESLAB_SQLPASS"] %>
