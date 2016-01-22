@@ -17,7 +17,7 @@ class BlogsControllerTest < ActionController::TestCase
   end
 
   test "should get show" do
-    get :show
+    get :show, {'urllink' => "12"}
     assert_response :success
   end
 
