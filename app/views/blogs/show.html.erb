@@ -5,7 +5,7 @@
       <% if @blog.top_image != "" %>
       <div style="background:url('<%=@blog.top_image%>');background-size:cover;height:350px;" class="image-responsive"></div>
       <% end %>
-
+      <a href="../../../../">Home</a> \\ <%= @blog.title %>
       <div class="caption">
         <div class="header">
           <span class="post-tag"><%= @blog.category %></span>

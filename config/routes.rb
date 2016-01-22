@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'uploads/new'
+
   root 'blogs#index'
   get 'blogs/allposts' => 'blogs#admin_list'
   post 'blogs/create' => 'blogs#create'
@@ -33,7 +35,10 @@ Rails.application.routes.draw do
   get '404' => 'pages#notfound'
   get 'secviolation' => 'pages#secviolation'
 
-
+  #uploader routes
+  get 'uploads/new' => 'uploads#new'
+  get 'uploads/get_images' => 'uploads#get_images'
+  resources :uploads
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

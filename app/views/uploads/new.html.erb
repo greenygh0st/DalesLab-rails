@@ -1,0 +1,17 @@
+<h1>Image Manager</h1>
+ <a href="../../../../">Home</a> \\ Image Manager
+<p>
+  <%= form_for(@upload, html: { multipart: true, class: "dropzone"}) do |f|  %>
+  <div class="fallback">
+    <%= f.file_field :image %><br>
+    <%= f.submit "Upload" %>
+  </div>
+  <% end %>
+  <br>
+</p>
+
+<script src="../../../js/dropzone.js"></script>
+<script src="../../../js/image-upload.js"></script>
+
+<link href="../../../../css/dropzone.css" rel="stylesheet">
+<link href="../../../../css/dropzone-basic.css" rel="stylesheet">

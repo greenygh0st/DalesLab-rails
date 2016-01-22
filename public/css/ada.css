@@ -548,6 +548,12 @@ fieldset[disabled] .navbar-ada .btn-link:focus {
   text-decoration: none;
 }
 
+.post .post-title:hover {
+  color: #FF7C26;
+  font-size: 22px;
+  text-decoration: none;
+}
+
 .post.featured .post-title {
   font-size: 30px;
 }

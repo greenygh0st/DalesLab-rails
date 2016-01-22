@@ -3,9 +3,7 @@ class BlogsController < ApplicationController
 
   def index
     @blogs = Blog.where(["is_published = ?", true]).order('created_at DESC')
-    @popularblogs = @blogs.where(["kind_of != ? and is_published = ?", "quote", true]).take(3).sort_by do |item|
-      item[:views]
-    end
+    @popularblogs = @blogs.where(["kind_of != ? and is_published = ?", "quote", true]).order('views desc').take(3)
     #need to get the top 5 most common tags - histogram time!! :D
       rawtags = []
       tags = Hash.new(0)
@@ -53,6 +51,7 @@ class BlogsController < ApplicationController
 
   def new
     @blog = Blog.new()
+    @images = Upload.all
   end
 
   def create
@@ -68,7 +67,7 @@ class BlogsController < ApplicationController
     words_c = word_count(@blog.content)
     if words_c == 0
       @blog.kind_of = "quote"
-    elsif words_c > 0 && words_c <= 25 && images_c < 4
+    elsif words_c > 0 && words_c <= 25 && images_c < 4 && images_c > 0
       @blog.kind_of = "singleimage"
     elsif words_c > 25 && images_c < 4
       @blog.kind_of = "blog"
@@ -80,7 +79,7 @@ class BlogsController < ApplicationController
 
     #should we publish this and notify people??
     if @blog.is_published && (@blog.published_at == nil || @blog.published_at == 0)
-      @blog.published_at == Time.now
+      @blog.published_at = Time.now
       #notify people
       #get subscriptions
       if @blog.kind_of != "quote"
@@ -110,6 +109,7 @@ class BlogsController < ApplicationController
     #find the post and attach it to the form
     link = params[:urllink]
     @blog = Blog.find_by urllink: link
+    @images = Upload.all
     #err
   end
 
@@ -142,7 +142,7 @@ class BlogsController < ApplicationController
     #err
     #should we publish this and notify people??
     if @blog.is_published && (@blog.published_at == nil || @blog.published_at == 0)
-      @blog.published_at == Time.now
+      @blog.published_at = Time.now
       #notify people
       #get subscriptions
       if @blog.kind_of != "quote"

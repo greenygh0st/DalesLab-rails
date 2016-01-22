@@ -147,7 +147,7 @@
 
             <h3>Popular posts</h3>
             <% @popularblogs.each do |popular| %>
-            <a href="post-image.html">
+            <a href="blogs/<%= popular.urllink %>">
               <img src="<%= popular.firstimage %>" alt="<%= popular.title %>" class="img-responsive" />
               <h4><%= popular.title %></h4>
             </a>

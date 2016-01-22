@@ -1,6 +1,7 @@
 <div id="documentation">
   <div class="container">
     <h2>Edit the post: <%= @blog.title %></h2>
+    <a href="../../../../">Home</a> \\ Edit Post
     <div class="block">
       <%= form_for @blog, url: {action: "update", urllink: @blog.urllink}, html: { :class => 'form-horizontal style-form' } do |f| %>
       <div class="form-group">
@@ -47,6 +48,11 @@
       </div>
       <% end %>
     </div>
+    <div class="block">
+      <% @images.each do |img| %>
+      <div style="width:150px; height:150px; display:inline-block;"><img src="../../../<%= img.image.url %>" alt='blah blah' style='max-width:100%' class="responsive-image" /></div>
+      <% end %>
+    </div>
   </div>
 </div>
 <script src="../../../../js/textarea-expander.js"></script>
@@ -57,6 +63,7 @@
 <script>
   tinymce.init({
     selector:'textarea',
+    paste_data_images: true,
     plugins: 'autolink link image lists charmap print preview code wordcount codesample',
     toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | codesample'
   });
