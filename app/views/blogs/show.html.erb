@@ -33,12 +33,12 @@
       </div>
       <div class="row">
         <!-- Random Posts -->
-        <% @random_blogs.each |ran| %>
+        <% @random_blogs.each do |ran| %>
         <div class="col-md-4">
           <a href="../../blogs/<%= ran.urllink %>">
             <img src="<%= ran.firstimage %>" class="img-responsive" />
             <h4><%= ran.title %></h4>
-            <span class="post-tag"><%= blog.category %></span>
+            <span class="post-tag"><%= ran.category %></span>
           </a>
         </div>
         <% end %>
