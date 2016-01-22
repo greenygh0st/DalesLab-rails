@@ -45,6 +45,9 @@ class BlogsController < ApplicationController
         @blog.views += 1 #update the number of post views by one
       end
       @blog.save #if the save doesn't work just ignore it for now
+      @random_blogs = Blog.order("RANDOM()").take(3)
+
+      #get three random posts
     end
   end
 

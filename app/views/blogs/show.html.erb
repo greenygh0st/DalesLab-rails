@@ -32,27 +32,16 @@
         <h3>You may also like</h3>
       </div>
       <div class="row">
+        <!-- Random Posts -->
+        <% @random_blogs.each |ran| %>
         <div class="col-md-4">
-          <a href="#">
-            <img src="img/photos/DeathtoStock_EnergyandSerenity7.jpg" class="img-responsive" />
-            <h4>Don't look at me</h4>
-            <span class="post-tag">#lifestype</span>
+          <a href="../../blogs/<%= ran.urllink %>">
+            <img src="<%= ran.firstimage %>" class="img-responsive" />
+            <h4><%= ran.title %></h4>
+            <span class="post-tag"><%= blog.category %></span>
           </a>
         </div>
-        <div class="col-md-4">
-          <a href="#">
-            <img src="img/photos/DeathtoStock_EnergyandSerenity6.jpg" class="img-responsive" />
-            <h4>You're sharp alright</h4>
-            <span class="post-tag">#music</span>
-          </a>
-        </div>
-        <div class="col-md-4">
-          <a href="#">
-            <img src="img/photos/DeathtoStock_EnergyandSerenity5.jpg" class="img-responsive" />
-            <h4>Loose lips</h4>
-            <span class="post-tag">#travel</span>
-          </a>
-        </div>
+        <% end %>
       </div>
     </div>
 

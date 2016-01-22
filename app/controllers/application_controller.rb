@@ -31,6 +31,12 @@ class ApplicationController < ActionController::Base
     string = img_srcs[0]
   end
 
+  def get_all_images string
+    doc = Nokogiri::HTML( string )
+    img_srcs = doc.css('img').map{ |i| i['src'] }
+    return img_srcs
+  end
+
   def get_image_count(string)
     doc = Nokogiri::HTML( string )
     img_srcs = doc.css('img').map{ |i| i['src'] }

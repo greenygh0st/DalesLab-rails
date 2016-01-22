@@ -7,9 +7,9 @@ $ docker build -t daleslab/image .
 
 # run container
 
-docker run -d -p 8080:80 -e SECRET_KEY_BASE=secretkey daleslab/site
+docker run -d -p 8080:80 -e DALESLAB_SECRET_KEY_BASE=secretkey daleslab/site
 
-docker run -d -p 8080:80 -e SECRET_KEY_BASE=secretkey -e DALESLAB_SQLPASS=sqlpass daleslab/site | docker build -
+docker run -d -p 8080:80 -e DALESLAB_SECRET_KEY_BASE=secretkey -e DALESLAB_SQLPASS=sqlpass daleslab/site | docker build -
 
 docker run -e FOO=bar builder_image | docker build -
 
