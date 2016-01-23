@@ -43,7 +43,7 @@ class BlogsController < ApplicationController
         @blog.views += 1 #update the number of post views by one
       end
       @blog.save #if the save doesn't work just ignore it for now
-      @random_blogs = Blog.all.where(["is_published = ?", true]).take(3) #would be nice if this was random. This is a to-do. :)
+      @random_blogs = Blog.all.where(["kind_of != ? and is_published = ?", "quote", true]).take(3) #would be nice if this was random. This is a to-do. :)
 
       #get three random posts
     end
