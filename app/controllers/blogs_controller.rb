@@ -78,7 +78,7 @@ class BlogsController < ApplicationController
     end
 
     #should we publish this and notify people??
-    if @blog.is_published && (@blog.published_at == nil || @blog.published_at == 0)
+    if @blog.is_published == true && (@blog.published_at == nil || @blog.published_at == "")
       @blog.published_at = Time.now
       #notify people
       #get subscriptions
@@ -141,7 +141,7 @@ class BlogsController < ApplicationController
     end
     #err
     #should we publish this and notify people??
-    if @blog.is_published && (@blog.published_at == nil || @blog.published_at == 0)
+    if @blog.is_published == true && (@blog.published_at == nil || @blog.published_at == "")
       @blog.published_at = Time.now
       #notify people
       #get subscriptions
@@ -153,7 +153,6 @@ class BlogsController < ApplicationController
         end
       end
     end
-
     #@blog.user = current_user #set the current user as the blogs author - should do an edited by thing later
     if @blog.update_attributes(blog_params)
       redirect_to action: "show", urllink: @blog.urllink, :notice => 'Blog post updated successfully.'
