@@ -44,7 +44,7 @@
         <% end %>
       </div>
     </div>
-
+    <% if @blog.allow_comments %>
     <div class="comments">
 
       <!-- START DISQUS -->
@@ -64,7 +64,7 @@
       <!-- END DISQUS -->
 
     </div>
-
+    <% end %>
 
   </div>
 

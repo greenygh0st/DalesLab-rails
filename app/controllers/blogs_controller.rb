@@ -76,9 +76,8 @@ class BlogsController < ApplicationController
     else
       @blog.kind_of = "blog" #in case somehow we miss one of the other conditions. :)
     end
-
     #should we publish this and notify people??
-    if @blog.is_published == true && (@blog.published_at == nil || @blog.published_at == "")
+    if blog_params[:is_published] == 1 && (@blog.published_at == nil || @blog.published_at == "")
       Rails.logger.info "Blog post is set to be published and is_published = #{@blog.is_published}"
       @blog.published_at = Time.now
       #notify people
@@ -144,8 +143,7 @@ class BlogsController < ApplicationController
     end
     #err
     #should we publish this and notify people??
-    #should we publish this and notify people??
-    if blog_params[:is_published] == true && (@blog.published_at == nil || @blog.published_at == "")
+    if blog_params[:is_published] == 1 && (@blog.published_at == nil || @blog.published_at == "")
       Rails.logger.info "Blog post is set to be published and is_published = #{@blog.is_published}"
       @blog.published_at = Time.now
       #notify people
