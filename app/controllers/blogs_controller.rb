@@ -43,7 +43,7 @@ class BlogsController < ApplicationController
         @blog.views += 1 #update the number of post views by one
       end
       @blog.save #if the save doesn't work just ignore it for now
-      @random_blogs = Blog.all.take(3) #would be nice if this was random. This is a to-do. :)
+      @random_blogs = Blog.all.where(["is_published = ?", true]).take(3) #would be nice if this was random. This is a to-do. :)
 
       #get three random posts
     end
@@ -86,7 +86,7 @@ class BlogsController < ApplicationController
         @subscriptions = Subscription.all()
         #send grid stuff here
         @subscriptions.each do |subscription|
-          send_email(subscription.email, "Dale's Lab - New Post", "<h1>There is a new post on Dale's Lab!</h1><p>There is a new post titled <strong>#{@blog.title}</strong> on Dale's Lab. You should go and check it out!</p><h6>You are receiving this email because you are because you are subscribed to new posts from Dale's Lab. If this is in error please click <a href=\"http://localhost:3000/subscription/#{subscription.verification_string}/delete\">here</a>.</h6>")
+          send_email(subscription.email, "Dale's Lab - New Post", "<h1>There is a new post on Dale's Lab!</h1><p>There is a new post titled <strong>#{@blog.title}</strong> on Dale's Lab. You should go and check it out!</p><h6>You are receiving this email because you are because you are subscribed to new posts from Dale's Lab. If this is in error please click <a href=\"https://daleslab.com/subscription/#{subscription.verification_string}/delete\">here</a>.</h6>")
         end
       end
     end
