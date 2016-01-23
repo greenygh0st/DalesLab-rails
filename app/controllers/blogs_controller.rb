@@ -79,6 +79,7 @@ class BlogsController < ApplicationController
 
     #should we publish this and notify people??
     if @blog.is_published == true && (@blog.published_at == nil || @blog.published_at == "")
+      Rails.logger.info "Blog post is set to be published and is_published = #{@blog.is_published}"
       @blog.published_at = Time.now
       #notify people
       #get subscriptions
@@ -89,6 +90,8 @@ class BlogsController < ApplicationController
           send_email(subscription.email, "Dale's Lab - New Post", "<h1>There is a new post on Dale's Lab!</h1><p>There is a new post titled <strong>#{@blog.title}</strong> on Dale's Lab. You should go and check it out!</p><h6>You are receiving this email because you are because you are subscribed to new posts from Dale's Lab. If this is in error please click <a href=\"https://daleslab.com/subscription/#{subscription.verification_string}/delete\">here</a>.</h6>")
         end
       end
+    else
+      Rails.logger.info "Blog post is not going to be published and is_published = #{@blog.is_published}"
     end
 
     #information that we need to update to prevent errors :)
@@ -141,7 +144,9 @@ class BlogsController < ApplicationController
     end
     #err
     #should we publish this and notify people??
+    #should we publish this and notify people??
     if @blog.is_published == true && (@blog.published_at == nil || @blog.published_at == "")
+      Rails.logger.info "Blog post is set to be published and is_published = #{@blog.is_published}"
       @blog.published_at = Time.now
       #notify people
       #get subscriptions
@@ -149,9 +154,11 @@ class BlogsController < ApplicationController
         @subscriptions = Subscription.all()
         #send grid stuff here
         @subscriptions.each do |subscription|
-          send_email(subscription.email, "Dale's Lab - New Post", "<h1>There is a new post on Dale's Lab!</h1> <p>There is a new post titled <strong>#{@blog.title}</strong> on Dale's Lab. You should go and check it out!</p><h6>You are receiving this email because you are because you are subscribed to new posts from Dale's Lab. If this is in error please click <a href=\"http://localhost:3000/subscription/#{subscription.verification_string}/delete\">here</a>.</h6>")
+          send_email(subscription.email, "Dale's Lab - New Post", "<h1>There is a new post on Dale's Lab!</h1><p>There is a new post titled <strong>#{@blog.title}</strong> on Dale's Lab. You should go and check it out!</p><h6>You are receiving this email because you are because you are subscribed to new posts from Dale's Lab. If this is in error please click <a href=\"https://daleslab.com/subscription/#{subscription.verification_string}/delete\">here</a>.</h6>")
         end
       end
+    else
+      Rails.logger.info "Blog post is not going to be published and is_published = #{@blog.is_published}"
     end
     #@blog.user = current_user #set the current user as the blogs author - should do an edited by thing later
     if @blog.update_attributes(blog_params)
