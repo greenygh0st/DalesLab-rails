@@ -9,8 +9,8 @@
       <section class="col-md-12 wow fadeIn">
         <div class="post">
           <div class="row">
-            <div class="col-md-6 media">
-              <img src="<%= blog.firstimage %>" class="img-responsive" />
+            <div class="col-md-6 media" style="height:345px; background-image:url('<%= blog.firstimage %>'); background-size:cover;">
+              <!--<img src="<%= blog.firstimage %>" class="img-responsive" />-->
             </div>
             <div class="col-md-6 caption">
               <span class="post-tag"><%= blog.category %></span>
@@ -56,7 +56,7 @@
           <i class="quote-right fa fa-quote-right"></i>
 
           <div class="text-center">
-            <img src="img/myphoto.jpg" class="quote-face" />
+            <img src="img/myphoto2.jpg" class="quote-face" />
             <blockquote>
               <p><%= blog.title %></p>
               <footer>Dale Myszewski</footer>
@@ -122,7 +122,7 @@
           <div class="about">
 
             <h3>About me</h3>
-            <img src="img/myphoto.jpg" class="avatar-full-width img-responsive" />
+            <img src="img/myphoto2.jpg" class="avatar-full-width img-responsive" />
 
             <p><strong>Dale Myszewski</strong>.</p>
             <p>Certifiable #InfoSec &amp; #WebDev guy. Full Stack Application Developer. Programmer. Gamer. Airsofter. Former LEO. All around Nerd. Happy Husband. Daddy. Jesus follower.<br /><b>My opinions are my own.</b></p>
@@ -147,7 +147,7 @@
 
             <h3>Popular posts</h3>
             <% @popularblogs.each do |popular| %>
-            <a href="post-image.html">
+            <a href="blogs/<%= popular.urllink %>">
               <img src="<%= popular.firstimage %>" alt="<%= popular.title %>" class="img-responsive" />
               <h4><%= popular.title %></h4>
             </a>

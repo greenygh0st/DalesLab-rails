@@ -1,0 +1,49 @@
+<div id="documentation">
+  <div class="container">
+    <h2>Edit portfolio item: <%= @portfolio.title %> </h2>
+    <div class="block">
+      <%= form_for @portfolio, url: {action: "create"}, html: { :class => 'form-horizontal style-form' } do |f| %>
+      <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">Post Title</label>
+        <div class="col-sm-10">
+          <%= f.text_field :title, :placeholder => "Enter a title...", :class => 'form-control'  %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">Post Sub-Title</label>
+        <div class="col-sm-10">
+          <%= f.text_field :image, :placeholder => "Enter an image url...", :class => 'form-control'  %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">Categories</label>
+        <div class="col-sm-10">
+          <%= f.text_field :category, :placeholder => "Categories (ie. #website #software, #etc)...", :class => 'form-control'  %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">Top Image</label>
+        <div class="col-sm-10">
+          <%= f.text_field :link, :placeholder => "Enter a link to the live item....(if applicable)", :class => 'form-control'  %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">Post Content</label>
+        <div class="col-sm-10">
+          <%= f.text_area :description, :placeholder => "Enter a description for the portfolio item...", :class => 'form-control expand'  %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">&nbsp;</label>
+        <div class="col-sm-10">
+            <%= f.submit "Create New Portfolio Item", class: "btn btn-theme" %>
+          </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script src="../../../../js/textarea-expander.js"></script>
+<script>
+		autosize(document.querySelectorAll('textarea'));
+</script>

@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_user
+  helper_method :require_user
+  helper_method :require_member
+  helper_method :require_editor
+  helper_method :require_admin
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -14,39 +18,33 @@ class ApplicationController < ActionController::Base
   end
 
   def require_member
-    redirect_to '/' unless current_user.editor?
+    redirect_to '/' unless current_user && current_user.member?
   end
 
   def require_editor
-    redirect_to '/' unless current_user.editor?
+    redirect_to '/' unless current_user && current_user.editor?
   end
 
   def require_admin
-    redirect_to '/' unless current_user.admin?
+    redirect_to '/' unless current_user && current_user.admin?
   end
 
   def get_first_image string
-    images = []
-    linked = string.gsub( %r{http://[^\s<]+} ) do |url|
-      if url[/(?:png|jpe?g|gif|svg)$/]
-        images << url
-      else
-        #do nothing
-      end
-    end
-    string = images[0]
+    doc = Nokogiri::HTML( string )
+    img_srcs = doc.css('img').map{ |i| i['src'] }
+    string = img_srcs[0]
+  end
+
+  def get_all_images string
+    doc = Nokogiri::HTML( string )
+    img_srcs = doc.css('img').map{ |i| i['src'] }
+    return img_srcs
   end
 
   def get_image_count(string)
-    count = 0
-    linked = string.gsub( %r{http://[^\s<]+} ) do |url|
-      if url[/(?:png|jpe?g|gif|svg)$/]
-        count += 1
-      else
-        #do nothing
-      end
-    end
-    return count
+    doc = Nokogiri::HTML( string )
+    img_srcs = doc.css('img').map{ |i| i['src'] }
+    return img_srcs.count
   end
 
   def word_count(string)

@@ -11,15 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151228033331) do
+ActiveRecord::Schema.define(version: 20160122194906) do
 
   create_table "blogs", force: :cascade do |t|
     t.string   "title"
     t.string   "subtitle"
     t.string   "category"
     t.string   "content"
-    t.boolean  "is_published"
-    t.boolean  "allow_comments"
+    t.boolean  "is_published",       default: false
+    t.boolean  "friends_and_family", default: false
+    t.boolean  "allow_comments",     default: false
     t.string   "top_image"
     t.string   "kind_of"
     t.integer  "views"
@@ -27,8 +28,19 @@ ActiveRecord::Schema.define(version: 20151228033331) do
     t.string   "firstimage"
     t.integer  "user_id"
     t.datetime "published_at"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  create_table "portfolios", force: :cascade do |t|
+    t.string   "title"
+    t.string   "image"
+    t.string   "description"
+    t.string   "link"
+    t.string   "category"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "subscriptions", force: :cascade do |t|
@@ -37,6 +49,15 @@ ActiveRecord::Schema.define(version: 20151228033331) do
     t.boolean  "verified"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+  end
+
+  create_table "uploads", force: :cascade do |t|
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'uploads/new'
+
   root 'blogs#index'
   get 'blogs/allposts' => 'blogs#admin_list'
   post 'blogs/create' => 'blogs#create'
@@ -7,6 +9,13 @@ Rails.application.routes.draw do
   get 'blogs/:urllink' => 'blogs#show', as: :blog
   get 'blogs/:urllink/edit' => 'blogs#edit'
   patch 'blogs/:urllink/update' => 'blogs#update'
+
+  #Portfolio
+  get 'portfolio' => 'portfolio#index'
+  get 'portfolio/new' => 'portfolio#new'
+  post 'portfolio/create' => 'portfolio#create'
+  get 'portfolio/:id/edit' => 'portfolio#edit'
+  patch 'portfolio/:id/update' => 'portfolio#update'
 
   #subscription routes
   get 'subscription/already_exists' => 'subscriptions#already_exists'
@@ -26,7 +35,10 @@ Rails.application.routes.draw do
   get '404' => 'pages#notfound'
   get 'secviolation' => 'pages#secviolation'
 
-
+  #uploader routes
+  get 'uploads/new' => 'uploads#new'
+  get 'uploads/get_images' => 'uploads#get_images'
+  resources :uploads
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

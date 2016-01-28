@@ -5,7 +5,7 @@
       <% if @blog.top_image != "" %>
       <div style="background:url('<%=@blog.top_image%>');background-size:cover;height:350px;" class="image-responsive"></div>
       <% end %>
-
+      <a href="../../../../">Home</a> \\ <%= @blog.title %>
       <div class="caption">
         <div class="header">
           <span class="post-tag"><%= @blog.category %></span>
@@ -16,7 +16,7 @@
           Written By: <%= @blog.user.first_name %>
         </div>
         <!-- Post Content -->
-        <%= parse_line_breaks(parse_links_and_images(@blog.content)).html_safe %>
+        <%= parse_line_breaks(@blog.content).html_safe %>
         <!-- Post Content Ends -->
 
       </div>
@@ -32,30 +32,19 @@
         <h3>You may also like</h3>
       </div>
       <div class="row">
+        <!-- Random Posts -->
+        <% @random_blogs.each do |ran| %>
         <div class="col-md-4">
-          <a href="#">
-            <img src="img/photos/DeathtoStock_EnergyandSerenity7.jpg" class="img-responsive" />
-            <h4>Don't look at me</h4>
-            <span class="post-tag">#lifestype</span>
+          <a href="../../blogs/<%= ran.urllink %>">
+            <img src="<%= ran.firstimage %>" class="img-responsive" />
+            <h4><%= ran.title %></h4>
+            <span class="post-tag"><%= ran.category %></span>
           </a>
         </div>
-        <div class="col-md-4">
-          <a href="#">
-            <img src="img/photos/DeathtoStock_EnergyandSerenity6.jpg" class="img-responsive" />
-            <h4>You're sharp alright</h4>
-            <span class="post-tag">#music</span>
-          </a>
-        </div>
-        <div class="col-md-4">
-          <a href="#">
-            <img src="img/photos/DeathtoStock_EnergyandSerenity5.jpg" class="img-responsive" />
-            <h4>Loose lips</h4>
-            <span class="post-tag">#travel</span>
-          </a>
-        </div>
+        <% end %>
       </div>
     </div>
-
+    <% if @blog.allow_comments %>
     <div class="comments">
 
       <!-- START DISQUS -->
@@ -75,7 +64,7 @@
       <!-- END DISQUS -->
 
     </div>
-
+    <% end %>
 
   </div>
 
