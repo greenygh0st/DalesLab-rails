@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_user
+  helper_method :require_user
+  helper_method :require_member
+  helper_method :require_editor
+  helper_method :require_admin
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -14,15 +18,15 @@ class ApplicationController < ActionController::Base
   end
 
   def require_member
-    redirect_to '/' unless current_user.member?
+    redirect_to '/' unless current_user && current_user.member?
   end
 
   def require_editor
-    redirect_to '/' unless current_user.editor?
+    redirect_to '/' unless current_user && current_user.editor?
   end
 
   def require_admin
-    redirect_to '/' unless current_user.admin?
+    redirect_to '/' unless current_user && current_user.admin?
   end
 
   def get_first_image string

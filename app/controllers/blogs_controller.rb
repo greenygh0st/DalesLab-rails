@@ -39,9 +39,8 @@ class BlogsController < ApplicationController
       redirect_to :controller => 'pages', :action => 'secviolation'
     else
       @blog = Blog.find_by urllink: link
-
       #member check if they are not a member redirect
-      if (@blog.friends_and_family && (!current_user.member || !current_user.admin))
+      if (@blog.friends_and_family && (!current_user || !current_user.member? || !current_user.admin?))
         flash[:info] = "You must be a member or logged in to view this post."
         redirect_to :controller => 'blogs', :action => 'index'
       end

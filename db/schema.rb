@@ -18,8 +18,9 @@ ActiveRecord::Schema.define(version: 20160122194906) do
     t.string   "subtitle"
     t.string   "category"
     t.string   "content"
-    t.boolean  "is_published"
-    t.boolean  "allow_comments"
+    t.boolean  "is_published",       default: false
+    t.boolean  "friends_and_family", default: false
+    t.boolean  "allow_comments",     default: false
     t.string   "top_image"
     t.string   "kind_of"
     t.integer  "views"
@@ -27,8 +28,8 @@ ActiveRecord::Schema.define(version: 20160122194906) do
     t.string   "firstimage"
     t.integer  "user_id"
     t.datetime "published_at"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "portfolios", force: :cascade do |t|
