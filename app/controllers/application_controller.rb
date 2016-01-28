@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_member
-    redirect_to '/' unless current_user.editor?
+    redirect_to '/' unless current_user.member?
   end
 
   def require_editor
