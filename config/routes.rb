@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
   #static pages
   get 'about' => 'pages#about'
+  get 'membership' => 'pages#membership'
 
   #error routes
   get '404' => 'pages#notfound'

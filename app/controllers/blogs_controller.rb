@@ -34,7 +34,6 @@ class BlogsController < ApplicationController
   end
 
   def show
-    require_member
     link = params[:urllink]
     if /^[a-z0-9-]+$/.match(link) == nil #Further SQL injection prevention - if the string contains anything not in the usual format commence freakout
       #freakout
@@ -42,10 +41,11 @@ class BlogsController < ApplicationController
     else
       @blog = Blog.find_by urllink: link
       #member check if they are not a member redirect
-      if (@blog.friends_and_family && (!current_user || !current_user.member? || !current_user.admin?))
-        flash[:info] = "You must be a member or logged in to view this post."
-        redirect_to :controller => 'blogs', :action => 'index'
-      end
+      require_member if @blog.friends_and_family
+      #if (@blog.friends_and_family && (!current_user || !current_user.member? || !current_user.admin?))
+      #  flash[:info] = "You must be a member or logged in to view this post."
+      #  redirect_to :controller => 'blogs', :action => 'index'
+      #end
 
       if @blog.is_published
         @blog.views += 1 #update the number of post views by one
