@@ -5,6 +5,7 @@ class BlogsController < ApplicationController
     @blogs = Blog.where(["is_published = ?", true]).order('created_at DESC')
     @popularblogs = @blogs.where(["kind_of != ? and is_published = ?", "quote", true]).order('views desc').take(3)
     #need to get the top 5 most common tags - histogram time!! :D
+    #as I get more posts I will probably need a better way to do this...
       rawtags = []
       tags = Hash.new(0)
 
@@ -33,6 +34,7 @@ class BlogsController < ApplicationController
   end
 
   def show
+    require_member
     link = params[:urllink]
     if /^[a-z0-9-]+$/.match(link) == nil #Further SQL injection prevention - if the string contains anything not in the usual format commence freakout
       #freakout
@@ -83,7 +85,7 @@ class BlogsController < ApplicationController
       @blog.kind_of = "blog" #in case somehow we miss one of the other conditions. :)
     end
     #should we publish this and notify people??
-    if blog_params[:is_published] == 1 && (@blog.published_at == nil || @blog.published_at == "")
+    if blog_params[:is_published] == 1
       Rails.logger.info "Blog post is set to be published and is_published = #{@blog.is_published}"
       @blog.published_at = Time.now
       #notify people
@@ -96,6 +98,7 @@ class BlogsController < ApplicationController
         end
       end
     else
+      @blog.published_at = nil #make sure this is actually set to nil
       Rails.logger.info "Blog post is not going to be published and is_published = #{@blog.is_published}"
     end
 
@@ -149,7 +152,7 @@ class BlogsController < ApplicationController
     end
     #err
     #should we publish this and notify people??
-    if blog_params[:is_published] == 1 && (@blog.published_at == nil || @blog.published_at == "")
+    if blog_params[:is_published] == "1" && @blog.published_at == nil
       Rails.logger.info "Blog post is set to be published and is_published = #{@blog.is_published}"
       @blog.published_at = Time.now
       #notify people
@@ -175,7 +178,7 @@ class BlogsController < ApplicationController
 
   private
   def blog_params
-    params.require(:blog).permit(:title, :subtitle, :top_image, :category, :content, :is_published)
+    params.require(:blog).permit(:title, :subtitle, :top_image, :category, :content, :is_published, :friends_and_family, :allow_comments)
   end
 
 end

@@ -14,11 +14,15 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user
-    redirect_to '/login' unless current_user
+    redirect_to '/login?redirect_to=#{params[:redirect_to]}' unless current_user
   end
 
   def require_member
-    redirect_to '/' unless current_user && current_user.member?
+    if !current_user
+      redirect_to '/login?redirect_to=#{params[:redirect_to]}'
+    elsif (current_user && (!current_user.member? || !current_user.admin?))
+      redirect_to '/membership'
+    end
   end
 
   def require_editor
