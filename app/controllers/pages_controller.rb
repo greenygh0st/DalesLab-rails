@@ -1,4 +1,7 @@
 class PagesController < ApplicationController
+  def membership
+  end
+
   def about
   end
 
