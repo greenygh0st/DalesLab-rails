@@ -1,0 +1,13 @@
+<div id="documentation">
+  <div class="container">
+    <h2>Create a new blog post</h2>
+    <a href="../../../../">Home</a> \\ Manage WebHook Keys
+    <div class="block">
+      <% "No WebHook keys present. Add one below" unless @keys.count > 0 %>
+      <% @keys.each do |k| %>
+      <p><%= k.name %></p>
+      <p><%= k.key %></p>
+      <% end %>
+    </div>
+  </div>
+</div>

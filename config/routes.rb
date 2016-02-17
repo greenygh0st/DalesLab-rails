@@ -41,6 +41,13 @@ Rails.application.routes.draw do
   get 'uploads/get_images' => 'uploads#get_images'
   resources :uploads
 
+  get 'users/keys' => 'users#list_hook_keys'
+  post 'users/keys/create' => 'users#list_hook_keys'
+  get 'users/keys/:id/destroy' => 'users#list_hook_keys'
+
+  #webhook(s)
+  post 'webhooks/twitter' => 'webhooks#twitter'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
