@@ -1,5 +1,10 @@
 require 'test_helper'
 
+#http://stackoverflow.com/questions/22700207/rails-fixtures-has-many-and-belongs-to
+#http://billpatrianakos.me/blog/2013/10/13/list-of-rails-status-code-symbols/
+#
+# :)
+
 class BlogsControllerTest < ActionController::TestCase
   setup do
     @blog_1 = blogs(:blog_one)
