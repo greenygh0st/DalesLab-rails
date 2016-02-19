@@ -1,9 +1,19 @@
-<div id="single">
+<div id="documentation">
   <div class="container">
-    <div class="post">
-      <!--portfolio top image here -->
-
-      <h2>Portfolio</h2>
+    <h2>Portfolio</h2>
+    <a href="../../../../">Home</a> \\ Portfolio
+    <div class="row">
+      <%= "<p>There are no portfolio items posted...you should post some.</p>".html_safe unless @portfolio_items.count > 0 %>
+      <% @portfolio_items.each do |item| %>
+      <div class="portfolio-item col-md-10 fadeIn wow">
+        <%= image_tag item.image.url(:small) %>
+        <h2><%= item.title %></h2>
+        <%= "<h4>#{item.link}</h4>".html_safe unless item.link == "" %></h4>
+        <a class="btn btn-ada-dark btn-tag"><%= item.category %></a>
+        <p><%= item.description %></p>
+        <%= link_to "Edit", { action: "edit", id: item.id } unless !current_user.admin?%>
+      </div>
+      <% end %>
     </div>
   </div>
 </div>

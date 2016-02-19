@@ -143,7 +143,7 @@
               <li><a href="https://github.com/greenygh0st"><i class="fa fa-github"></i></a></li>
               <li><a href="https://twitter.com/dalemysz"><i class="fa fa-twitter"></i></a></li><br />
               <!--<li><a href="#"><i class="fa fa-instagram"></i></a></li>-->
-              <li>Dale's Lab &copy; <%= Time.now.strftime("%Y") %>.</li><br />
+              <li>Dale's Lab &copy; <%= Time.now.strftime("%Y") %>. <%= " | " unless current_user %> <%= link_to "Login", { :controller => "sessions", :action => "new" } unless current_user %></li><br />
               <li>Proudly hosted on <a href="https://m.do.co/c/9471be4bff04">DigitalOcean</a>.</li>
             </ul>
           </div>

@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   def require_member
     if !current_user
       redirect_to '/login?redirect_to=#{params[:redirect_to]}'
-    elsif (current_user && (!current_user.member? || !current_user.admin?))
+    elsif (current_user && !(!current_user.member? || !current_user.admin?))
       redirect_to '/membership'
     end
   end

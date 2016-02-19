@@ -7,7 +7,7 @@
       <% if inc == 1 && blog.kind_of != "quote" %>
       <!-- Featured Post - first post -->
       <section class="col-md-12 wow fadeIn">
-        <div class="post">
+        <div class="post <%= "members-only" unless blog.friends_and_family == false %>">
           <div class="row">
             <div class="col-md-6 media" style="height:345px; background-image:url('<%= blog.firstimage %>'); background-size:cover;">
               <!--<img src="<%= blog.firstimage %>" class="img-responsive" />-->
@@ -28,7 +28,7 @@
       <% else %>
       <section class="col-md-6 wow fadeIn">
       <% end %>
-        <div class="post">
+        <div class="post <%= "members-only" unless !blog.friends_and_family %>">
           <div class="media">
             <div id="slides-1">
               <img src="img/photos/DeathtoStock_EnergyandSerenity7.jpg" class="img-responsive" />
@@ -72,7 +72,7 @@
       <section class="col-md-6 wow fadeIn">
       <% end %>
 
-        <div class="post">
+        <div class="post <%= "members-only" unless !blog.friends_and_family %>">
           <div class="caption">
 
             <div class="post-thumb">
@@ -112,7 +112,6 @@
         </div>
       </div>
       <% end %>
-
     </div>
 
     <!-- The sidebar goes right here!! :) -->
@@ -125,7 +124,8 @@
             <img src="img/myphoto2.jpg" class="avatar-full-width img-responsive" />
 
             <p><strong>Dale Myszewski</strong>.</p>
-            <p>Certifiable #InfoSec &amp; #WebDev guy. Full Stack Application Developer. Programmer. Gamer. Former LEO. All around Nerd. Happy Husband. Daddy. Jesus follower.<br /><!--<b>My opinions are my own.</b>--></p>
+            <p>Certifiable #WebDev &amp; #InfoSec guy. Full Stack Web Application Developer. Programmer. Gamer. Former LEO. All around Nerd. Happy Husband. Daddy. Jesus follower.<br /><!--<b>My opinions are my own.</b>--></p>
+            <p><a class="btn btn-ada-dark" href="/portfolio">Some of the work I've done</a></p>
             <p><a class="btn btn-ada-dark" href="https://twitter.com/dalemysz" target="_blank">Get in touch</a></p>
 
           </div>
@@ -154,7 +154,6 @@
             <% end %>
           </div>
         </section>
-
       </div>
     </div>
   </div>
