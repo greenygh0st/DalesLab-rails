@@ -8,9 +8,9 @@
       <div class="portfolio-item col-md-10 fadeIn wow">
         <%= image_tag item.image.url(:small) %>
         <h2><%= item.title %></h2>
-        <%= "<h4>#{item.link}</h4>".html_safe unless item.link == "" %></h4>
+        <%= "<h4><a href='#{item.link}'>#{item.link}</a></h4>".html_safe unless item.link == "" %></h4>
         <a class="btn btn-ada-dark btn-tag"><%= item.category %></a>
-        <p><%= item.description %></p>
+        <p><%= parse_line_breaks(item.description.html_safe) %></p>
         <%= link_to "Edit", { action: "edit", id: item.id } unless !current_user.admin?%>
       </div>
       <% end %>
