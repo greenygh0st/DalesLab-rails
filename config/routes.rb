@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post 'portfolio/create' => 'portfolio#create'
   get 'portfolio/:id/edit' => 'portfolio#edit'
   patch 'portfolio/:id/update' => 'portfolio#update'
+  get 'portfolio/:id/destroy' => 'portfolio#destroy'
 
   #subscription routes
   get 'subscription/already_exists' => 'subscriptions#already_exists'
@@ -30,6 +31,7 @@ Rails.application.routes.draw do
 
   #static pages
   get 'about' => 'pages#about'
+  get 'membership' => 'pages#membership'
 
   #error routes
   get '404' => 'pages#notfound'
