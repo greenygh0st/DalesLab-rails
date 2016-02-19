@@ -454,6 +454,18 @@ fieldset[disabled] .navbar-ada .btn-link:focus {
   margin: 40px auto;
 }
 
+#posts .post.members-only:before{
+  display: block;
+  position: absolute;
+  top:20px; left:20px;
+  color:#fff;
+  text-shadow: 0.1px 0.1px 1px rgba(0,0,0,.8);
+  padding: 4px;
+  content: "Members Only";
+  background:#ffd700;
+  height:28px;
+}
+
 #posts .post,
 #posts .quote,
 #slideshow .post {
@@ -662,6 +674,23 @@ fieldset[disabled] .navbar-ada .btn-link:focus {
   margin: 10px auto;
 }
 
+.portfolio-item
+{
+  margin: 40px auto;
+  background: #fff;
+  box-shadow: 0px 3px 4px 0px rgba(0,0,0,0.03);
+}
+
+.portfolio-item > img
+{
+  float: left;
+  margin-right: 15px;
+}
+
+.portfolio-item > img:nth-child(2n+2)
+{
+  float: right;
+}
 /***********************************************
 * 404
 ***********************************************/

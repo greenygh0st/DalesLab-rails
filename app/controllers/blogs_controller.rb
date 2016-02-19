@@ -4,7 +4,7 @@ class BlogsController < ApplicationController
   def index
     @blogs = Blog.where(["is_published = ?", true]).order('created_at DESC')
     @popularblogs = @blogs.where(["kind_of != ? and is_published = ?", "quote", true]).order('views desc').take(3)
-    #need to get the top 5 most common tags - histogram time!! :D
+    #need to get the top 20 most common tags - histogram time!! :D
     #as I get more posts I will probably need a better way to do this...
       rawtags = []
       tags = Hash.new(0)
