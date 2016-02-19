@@ -18,10 +18,10 @@ test:
   pool: 5
   timeout: 5000
   database: db/test.sqlite3
- #<%= ENV["DALESLAB_SQLPASS"] %>
+ #
 production:
-  host: 192.241.180.82
+  host: db.daleslab.com
   adapter:  mysql2
   database: daleslab-production
   username: daleslab-usr
-  password: 9n6tkHc8yPYxZm8D
+  password: <%= ENV["DALESLAB_SQLPASS"] %>

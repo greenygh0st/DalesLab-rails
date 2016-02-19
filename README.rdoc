@@ -7,11 +7,13 @@ $ docker build -t daleslab/image .
 
 # run container
 
-**USE THIS ONE: docker run -d -p 8080:80 -e DALESLAB_SECRET_KEY_BASE=secretkey -v /root/file-uploads/daleslab:/app/public/assets daleslab/site**
+**USE THIS ONE: docker run -d -p 8080:80 -e DALESLAB_SECRET_KEY_BASE=secretkey -e DALESLAB_SQLPASS=topsecret -v /root/file-uploads/daleslab:/app/public/assets daleslab/site **
 
 docker run -d -p 8080:80 -e DALESLAB_SECRET_KEY_BASE=secretkey -e DALESLAB_SQLPASS=sqlpass daleslab/site | docker build -
 
 docker run -e FOO=bar builder_image | docker build -
+
+rake db:migrate RAILS_ENV="production" 
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
