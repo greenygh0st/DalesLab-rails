@@ -2,9 +2,8 @@ class CreatePortfolios < ActiveRecord::Migration
   def change
     create_table :portfolios do |t|
       t.string :title
-      t.string :image
       t.string :description
-      t.string :link
+      t.string :link, default: ""
       t.string :category
 
       t.references :user
