@@ -38,6 +38,10 @@ module ApplicationHelper
       "<br />"
     end
     string = toparse
+    toparse = string.gsub(%r{\\r}) do |t|
+      "<br />"
+    end
+    string = toparse
   end
 
   def truncate_to_first_paragraph(string)
