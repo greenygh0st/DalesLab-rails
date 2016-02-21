@@ -104,8 +104,6 @@ class BlogsController < ApplicationController
 
     #information that we need to update to prevent errors :)
     @blog.views = 0
-    @blog.allow_comments = true
-    @blog.is_published = true
     @blog.user = current_user #set the current user as the blogs author
 
     if @blog.save
