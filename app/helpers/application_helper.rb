@@ -34,14 +34,7 @@ module ApplicationHelper
   end
 
   def parse_line_breaks string
-    toparse = string.gsub(%r{\\n}) do |t|
-      "<br />"
-    end
-    string = toparse
-    toparse = string.gsub(%r{\\r}) do |t|
-      "<br />"
-    end
-    string = toparse
+    string = string.gsub("\r\n","<br/>")
   end
 
   def truncate_to_first_paragraph(string)
