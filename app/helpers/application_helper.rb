@@ -1,4 +1,14 @@
 module ApplicationHelper
+  def current_user_admin?
+    if current_user
+      if current_user.admin?
+        return true
+      end
+      return false
+    end
+    return false
+  end
+  
   def parse_links_and_images string
     linked = string.gsub( %r{http://[^\s<]+} ) do |url|
       if url[/(?:png|jpe?g|gif|svg)$/]
