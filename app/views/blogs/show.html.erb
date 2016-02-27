@@ -16,14 +16,14 @@
           Written By: <%= @blog.user.first_name %>
         </div>
         <!-- Post Content -->
-        <%= parse_line_breaks(@blog.content).html_safe %>
+        <%= @blog.content.html_safe %>
         <!-- Post Content Ends -->
 
       </div>
     </div>
     <% if current_user && current_user.admin? %>
       <p class="blog-edit">
-        <a href="<%= @blog.urllink %>/edit" class="post-title">Edit This Post</a>
+        <%= link_to "Edit This Post", action: "edit", urllink: @blog.urllink %>
       </p>
     <% end %>
 
@@ -51,7 +51,7 @@
       <div id="disqus_thread"></div>
       <script type="text/javascript">
           /* * * CONFIGURATION VARIABLES * * */
-          var disqus_shortname = 'adabootstrap';
+          var disqus_shortname = 'daleslab';
 
           /* * * DON'T EDIT BELOW THIS LINE * * */
           (function() {
