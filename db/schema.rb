@@ -34,13 +34,12 @@ ActiveRecord::Schema.define(version: 20160218221130) do
 
   create_table "portfolios", force: :cascade do |t|
     t.string   "title"
-    t.string   "image"
     t.string   "description"
-    t.string   "link"
+    t.string   "link",               default: ""
     t.string   "category"
     t.integer  "user_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
@@ -71,8 +70,12 @@ ActiveRecord::Schema.define(version: 20160218221130) do
     t.string   "password_digest"
     t.string   "role"
     t.string   "image"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "auth_secret"
+    t.boolean  "use_two_factor",  default: false
+    t.integer  "login_attempts",  default: 0
+    t.boolean  "account_locked",  default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
 end

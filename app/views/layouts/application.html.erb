@@ -83,6 +83,9 @@
                 <li class="divider"></li>
                 <li><%= link_to "Image Manager", { :controller => "uploads", :action => "new" } %></li>
                 <li class="divider"></li>
+                <li><%= link_to "Change Password", { :controller => "account", :action => "change_password"} %></li>
+                <li><%= link_to "Two Factor Auth", { :controller => "account", :action => "enable_tfa"} %></li>
+                <li class="divider"></li>
                 <li><%= link_to "Log out", logout_path, method: "delete" %></li>
               </ul>
             </li>

@@ -24,6 +24,16 @@ Rails.application.routes.draw do
   get 'subscription/:verify/verify' => 'subscriptions#verify'
   get 'subscription/:verify/delete' => 'subscriptions#delete'
 
+  #account routes
+  get 'account/change_password' => 'account#change_password'
+  post 'account/change_password' => 'account#update_password'
+  get 'account/enable_tfa' => 'account#enable_tfa'
+  post 'account/enable_tfa' => 'account#enable_tfa_post'
+  get 'account/verify_tfa' => 'account#verify_tfa'
+  post 'account/verify_tfa' => 'account#verify_tfa_post'
+  post 'account/disable_tfa' => 'account#disable_tfa'
+
+
   #session routes
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
