@@ -1,0 +1,29 @@
+<div id="single">
+  <div class="container">
+    <div style="text-align:center;">
+      <h1>Enable Two Factor Authentication</h1>
+      <% if !current_user.use_two_factor %>
+
+      <div>
+        <%= image_tag(google_authenticator_qrcode(current_user), :alt => 'Google Authenticator QRCode') %>
+      </div>
+      <%= form_for(:enable_tfa, url: account_enable_tfa_path, html: { :class => 'form-horizontal style-form' }) do |f| %>
+      <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">Password</label>
+        <div class="col-sm-10">
+            <%= f.password_field :password, :placeholder => "Password...", :class => 'form-control'  %>
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">&nbsp;</label>
+        <div class="col-sm-10">
+            <%= f.submit "Enable Two Factor Authentication", class: "btn btn-theme" %>
+          </div>
+      </div>
+      <% end %>
+      <% else %>
+      <h4>Two factor auth is currently enabled.</h4>
+      <% end %>
+    </div>
+  </div>
+</div>
