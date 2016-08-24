@@ -84,8 +84,9 @@ class BlogsController < ApplicationController
     else
       @blog.kind_of = "blog" #in case somehow we miss one of the other conditions. :)
     end
+
     #should we publish this and notify people??
-    if blog_params[:is_published] == 1
+    if @blog.is_published #blog_params[:is_published]
       Rails.logger.info "Blog post is set to be published and is_published = #{@blog.is_published}"
       @blog.published_at = Time.now
       #notify people
@@ -105,7 +106,7 @@ class BlogsController < ApplicationController
     #information that we need to update to prevent errors :)
     @blog.views = 0
     @blog.user = current_user #set the current user as the blogs author
-
+    
     if @blog.save
       #eventually trigger the notifications to others
       redirect_to action: "show", urllink: @blog.urllink, :notice => 'Blog post created successfully.'
