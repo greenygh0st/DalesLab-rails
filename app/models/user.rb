@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   #interesting things to note here...https://www.railstutorial.org/book/updating_and_deleting_users
-  before_save :lock_account
+  #before_save :lock_account
 
   has_secure_password
 
