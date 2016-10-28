@@ -73,7 +73,7 @@ class ApplicationController < ActionController::Base
       m.html = message
     end
 
-    res = client.send(mail)
+    #res = client.send(mail) #sending of emails currently disabled until site is moved to new sendgrid api
 
     if res.code == 200
       return true
