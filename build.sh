@@ -7,6 +7,7 @@
 # * * * * * /repodironserver/build.sh
 
 #Check to see if there have been any changes
+git checkout master
 git diff
 if [ $? -eq 0 ]
 then
@@ -19,5 +20,5 @@ then
   #Remove the old container
   docker rm daleslab-livesite
   #Start the new container
-  docker run -d -p 8080:80 --name=daleslab-livesite -e DALESLAB_SECRET_KEY_BASE=$1 -e DALESLAB_SQLPASS=$2 -v /root/file-uploads/daleslab:/app/public/assets daleslab/site
+  docker run -d -p 8080:80 --name=daleslab-livesite -e DALESLAB_SECRET_KEY_BASE=$1 -e DALESLAB_SQLPASS=$2 -e DALESLAB_SENDGRID_API_KEY=$3 -v /root/file-uploads/daleslab:/app/public/assets daleslab/site
 fi

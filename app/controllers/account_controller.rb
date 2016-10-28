@@ -47,6 +47,7 @@ class AccountController < ApplicationController
   #/account/disable_tfa POST
   def disable_tfa
     #disable TFA boolean and blank out auth_secret
+    #not implemented
   end
 
   #/account/verify_tfa GET

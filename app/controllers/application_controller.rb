@@ -14,7 +14,12 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user
-    redirect_to '/login?redirect_to=#{params[:redirect_to]}' unless current_user
+    if !current_user
+      redirect_to '/login?redirect_to=#{params[:redirect_to]}'
+    else
+      flash[:danger] = "You are not authorized to view that page."
+      redirect_to '/'
+    end
   end
 
   def require_member
@@ -59,7 +64,7 @@ class ApplicationController < ActionController::Base
   def send_email(to, subject, message)
     # API key only #
     client = SendGrid::Client.new do |c|
-      c.api_key = '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' #need to get from env variable on production...maybe?
+      c.api_key = ENV["DALESLAB_SENDGRID_API_KEY"]
     end
     mail = SendGrid::Mail.new do |m|
       m.to = to
