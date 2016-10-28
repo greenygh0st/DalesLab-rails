@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
             redirect_to params[:redirect_to]
           end
         else
-          #@user.increment_login_attempts
+          @user.increment_login_attempts
           flash[:danger] = "Two factor authentication is enabled for this account. Incorrect token provided. Please try again."
           redirect_to '/login'
         end
@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
       end
     else
       if @user
-        #@user.increment_login_attempts
+        @user.increment_login_attempts
         send_email(@user.email, "Dales Lab - Account Access", "Someone attempted to log into your account but the incorrect password was entered. If this was you please disregard this email.")
       end
       flash[:danger] = "Incorrect username/password provided."
