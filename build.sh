@@ -7,7 +7,7 @@
 # * * * * * /repodironserver/build.sh
 
 #Check to see if there have been any changes
-git checkout master
+#git checkout master
 git diff
 if [ $? -eq 0 ]
 then
