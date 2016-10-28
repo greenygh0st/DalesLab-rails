@@ -18,7 +18,9 @@ gem 'rotp'
 
 # add paperclip and bootstrap
 
-gem "paperclip", "~> 4.1"
+gem 'paperclip', :git=> 'https://github.com/thoughtbot/paperclip', :ref => '523bd46c768226893f23889079a7aa9c73b57d68'
+gem 'aws-sdk'#, '~> 2.3'
+#gem "paperclip", "~> 4.1"
 #gem 'bootstrap-sass', '~> 3.1.1'
 
 # Use jquery as the JavaScript library
@@ -58,9 +60,10 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+group :development do
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
 end
