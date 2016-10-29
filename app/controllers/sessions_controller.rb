@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
     else
       if @user
         @user.increment_login_attempts
-        send_email(@user.email, "Dales Lab - Account Access", "Someone attempted to log into your account but the incorrect password was entered. If this was you please disregard this email.")
+        #send_email(@user.email, "Dales Lab - Account Access", "Someone attempted to log into your account but the incorrect password was entered. If this was you please disregard this email.")
       end
       flash[:danger] = "Incorrect username/password provided."
       redirect_to '/login'
