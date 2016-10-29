@@ -2,6 +2,7 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # s3 for file uploads
+  # https://coderwall.com/p/vv1iwg/set-up-ruby-on-rails-with-paperclip-5-and-s3-using-aws-sdk-v2
   config.paperclip_defaults = {
     storage: :s3,
     :s3_protocol => :https,
