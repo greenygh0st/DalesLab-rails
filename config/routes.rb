@@ -33,6 +33,11 @@ Rails.application.routes.draw do
   post 'account/verify_tfa' => 'account#verify_tfa_post'
   post 'account/disable_tfa' => 'account#disable_tfa'
 
+  #password resets
+  get 'forgot-password' => 'account#forgot_password'
+  post 'forgot-password' => 'account#forgot_password_create'
+  get 'password-reset/:password_reset_token' => 'account#password_reset'
+  patch 'password-reset/:password_reset_token' => 'account#password_reset_do', as: :password_reset_patch
 
   #session routes
   get 'login' => 'sessions#new'

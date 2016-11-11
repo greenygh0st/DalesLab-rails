@@ -1,3 +1,6 @@
+require 'sendgrid-ruby'
+include SendGrid
+
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -62,24 +65,41 @@ class ApplicationController < ActionController::Base
   end
 
   def send_email(to, subject, message)
-    # API key only #
-    client = SendGrid::Client.new do |c|
-      c.api_key = ENV["DALESLAB_SENDGRID_API_KEY"]
-    end
-    mail = SendGrid::Mail.new do |m|
-      m.to = to
-      m.from = 'noreply@daleslab.com'
-      m.subject = subject
-      m.html = message
-    end
+    #message.gsub!('localhost:3000', 'daleslab.com') if ENV["RAILS_ENV"] != nil && ENV["RAILS_ENV"] == 'production'
+    data = JSON.parse('{
+      "personalizations": [
+        {
+          "to": [
+            {
+              "email": "'+to+'"
+            }
+          ],
+          "subject": "Dale\'s Lab - '+subject+'"
+        }
+      ],
+      "from": {
+        "email": "noreply@daleslab.com"
+      },
+      "content": [
+        {
+          "type": "text/html",
+          "value": "'+message+'<p><b><strong>Please do not reply to this email.</strong></b><p/><p>Sincerely,</p><p>Dale</p>"
+        }
+      ]
+    }')
+    sg = SendGrid::API.new(api_key: ENV['DALESLAB_SENDGRID_API_KEY'])
+    response = sg.client.mail._('send').post(request_body: data)
+    puts response.status_code
+    puts response.body
+    puts response.headers
 
-    #res = client.send(mail) #sending of emails currently disabled until site is moved to new sendgrid api
-
-    if res.code == 200
+    if response.status_code.to_i == 202 || response.status_code.to_i == 200
+      puts 'Email sent successfully.'
       return true
     else
       return false
     end
+    #ENV['DALESLAB_SENDGRID_API_KEY']
   end
 
 end
