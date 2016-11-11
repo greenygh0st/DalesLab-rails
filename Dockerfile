@@ -1,5 +1,5 @@
 # Dockerfile
-FROM greenygh0st/rails-unicorn-nginx:v1.0-ruby2.2.0-nginx1.6.0
+FROM greenygh0st/rails-unicorn-nginx:v1.0-ruby2.3.1-nginx1.6.0
 
 #Again make sure everything is up-to-date
 RUN apt-get update
